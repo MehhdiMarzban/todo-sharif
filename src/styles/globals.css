@@ -99,3 +99,12 @@
         @apply bg-background text-foreground;
     }
 }
+
+@utility container{
+    padding-inline : 1rem;
+    margin-inline : auto;
+
+    @variant 2xl {
+        max-width: 1200px;
+    }
+}
