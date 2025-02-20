@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -22,6 +23,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useUserStore from "@/context/UserState";
 
 const Signin: React.FC = () => {
     const form = useForm<AuthType>({
@@ -32,17 +34,26 @@ const Signin: React.FC = () => {
         },
     });
 
+    const { signinUser } = useUserStore();
+    const router = useRouter();
+
     const onSubmit = (values: AuthType) => {
-        console.log(values);
+        try {
+            //* sign up and redirect to home page
+            const isSuccess = signinUser(values);
+            if (isSuccess) {
+                router.replace("/");
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <Card className="rounded-t-none">
             <CardHeader className="text-center">
                 <CardTitle>ورود کاربر</CardTitle>
-                <CardDescription>
-                    خوش آمدید، لطفا مشخصات خود را وارد نمایید 
-                </CardDescription>
+                <CardDescription>خوش آمدید، لطفا مشخصات خود را وارد نمایید</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -100,4 +111,3 @@ const Signin: React.FC = () => {
 };
 
 export default Signin;
-

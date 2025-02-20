@@ -11,8 +11,8 @@ export type UserState = {
 };
 
 export type UserActions = {
-    signupUser: (user: User) => void;
-    signinUser: (user: User) => void;
+    signupUser: (user: User) => boolean;
+    signinUser: (user: User) => boolean;
     logoutUser: () => void;
     removeUser: (id: string) => void;
 };
@@ -26,12 +26,14 @@ const useUserStore = create<UserStore>()(
             users: [],
             currentUser: undefined,
             totalUsers: 0,
-            signupUser: (user: User) =>
+            signupUser: (user: User) => {
+                let isSuccess = false;
                 set((state) => {
                     const isExist = state.users.find((u) => u.username === user.username);
                     if (isExist) {
                         return {};
                     } else {
+                        isSuccess = true;
                         const newUser = { ...user, id: Date.now().toString() };
                         return {
                             users: [...state.users, newUser],
@@ -39,13 +41,17 @@ const useUserStore = create<UserStore>()(
                             totalUsers: state.users.length,
                         };
                     }
-                }),
-            signinUser: (user: User) =>
+                });
+                return isSuccess;
+            },
+            signinUser: (user: User) => {
+                let isSuccess = false;
                 set((state) => {
                     const currentUser = state.users.find(
                         (u) => u.username === user.username && u.password === user.password
                     );
                     if (currentUser) {
+                        isSuccess = true;
                         return {
                             currentUser,
                         };
@@ -54,7 +60,9 @@ const useUserStore = create<UserStore>()(
                             currentUser: undefined,
                         };
                     }
-                }),
+                });
+                return isSuccess;
+            },
             removeUser: (id: string) =>
                 set((state) => {
                     return {

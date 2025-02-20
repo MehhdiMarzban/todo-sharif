@@ -1,7 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { AuthType, authValidation } from "@/validations/auth";
 import {
     Card,
@@ -21,6 +23,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useUserStore from "@/context/UserState";
 
 const Signup: React.FC = () => {
     const form = useForm<AuthType>({
@@ -31,8 +34,19 @@ const Signup: React.FC = () => {
         },
     });
 
+    const { signupUser } = useUserStore();
+    const router = useRouter();
+
     const onSubmit = (values: AuthType) => {
-        console.log(values);
+        try {
+            //* sign up and redirect to home page
+            const isSuccess = signupUser(values);
+            if (isSuccess) {
+                router.replace("/");
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
