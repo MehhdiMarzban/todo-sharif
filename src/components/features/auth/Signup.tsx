@@ -38,11 +38,9 @@ const Signup: React.FC = () => {
 
     return (
         <Card className="rounded-t-none">
-            <CardHeader>
+            <CardHeader className="text-center">
                 <CardTitle>ثبت نام کاربر جدید</CardTitle>
-                <CardDescription>
-                    خوش آمدید، لطفا اطلاعات خود را وارد کنید
-                </CardDescription>
+                <CardDescription>لطفا اطلاعات خود را وارد نمایید</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
