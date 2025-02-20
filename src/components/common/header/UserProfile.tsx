@@ -27,7 +27,7 @@ const UserProfile: React.FC = () => {
     const { loading } = useIsUserLoaded();
 
     if (loading) {
-        return <LoadingIcon className="size-9" />;
+        return <LoadingIcon className="size-9 stroke-primary text-white" />;
     }
 
     if (!currentUser) {
