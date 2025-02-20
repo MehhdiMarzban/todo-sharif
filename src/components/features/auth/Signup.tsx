@@ -23,7 +23,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import useUserStore from "@/context/UserState";
+import useUserStore from "@/stores/UserState";
 
 const Signup: React.FC = () => {
     const form = useForm<AuthType>({
