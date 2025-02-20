@@ -6,7 +6,10 @@ import { Footer, Header } from "@/components/common";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-    title: siteConfig.title,
+    title: {
+        template: `%s | ${siteConfig.title}`,
+        default: siteConfig.title
+    },
     description: siteConfig.description,
 };
 
