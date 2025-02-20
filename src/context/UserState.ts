@@ -13,6 +13,7 @@ export type UserState = {
 export type UserActions = {
     signupUser: (user: User) => void;
     signinUser: (user: User) => void;
+    logoutUser: () => void;
     removeUser: (id: string) => void;
 };
 
@@ -31,8 +32,10 @@ const useUserStore = create<UserStore>()(
                     if (isExist) {
                         return {};
                     } else {
+                        const newUser = { ...user, id: Date.now().toString() };
                         return {
-                            users: [...state.users, user],
+                            users: [...state.users, newUser],
+                            currentUser: user,
                             totalUsers: state.users.length,
                         };
                     }
@@ -59,6 +62,7 @@ const useUserStore = create<UserStore>()(
                         totalUsers: state.users.length,
                     };
                 }),
+            logoutUser: () => set((state) => ({ currentUser: undefined })),
         }),
         {
             name: "sharif-user-storage", //* storage name
