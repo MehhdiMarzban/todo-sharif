@@ -7,10 +7,10 @@ interface TabsAuthProps {
 }
 const TabsAuth: React.FC<TabsAuthProps> = ({ SigninComponent, SignupComponent }) => {
     return (
-        <Tabs>
-            <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin">ورود</TabsTrigger>
-                <TabsTrigger value="signup">ثبت نام</TabsTrigger>
+        <Tabs dir="rtl" defaultValue="signin">
+            <TabsList className="grid w-full grid-cols-2 h-11" >
+                <TabsTrigger className="text-base" value="signin">ورود</TabsTrigger>
+                <TabsTrigger className="text-base" value="signup">ثبت نام</TabsTrigger>
             </TabsList>
             <TabsContent value="signin">
                 <SigninComponent />
