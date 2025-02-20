@@ -4,6 +4,11 @@ import Signup from "./Signup";
 import TabsAuth from "./TabsAuth";
 import useAuthGuard from "@/hooks/useAuthGuard";
 
+    /**
+     * Handles authentication with Signin and Signup components.
+     * If the user is logged in, redirect to "/".
+     * If the user is not logged in, show the TabsAuth component with Signin and Signup components.
+     */
 const Auth: React.FC = () => {
     //* this hook check if user is logged in then redirect to "/"
     const { currentUser, loading } = useAuthGuard(true);

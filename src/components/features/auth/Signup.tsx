@@ -25,6 +25,15 @@ import {
 import { Input } from "@/components/ui/input";
 import useUserStore from "@/stores/UserState";
 
+/**
+ * Signup component renders a user sign-up form using `react-hook-form`.
+ * It validates the input data with Zod schema and handles user sign-up
+ * using the `signupUser` function from `useUserStore`.
+ * 
+ * The form includes fields for username and password, and upon successful
+ * sign-up, the user is redirected to the home page. Displays input validation
+ * messages and uses Next.js router for navigation.
+ */
 const Signup: React.FC = () => {
     const form = useForm<AuthType>({
         resolver: zodResolver(authValidation),

@@ -1,3 +1,10 @@
+/**
+ * A loading spinner icon component that renders an animated SVG.
+ * The icon is circular with a rotating segment, indicating a loading state.
+ *
+ * @param props - React SVG props to customize the SVG element.
+ * @returns A JSX element representing an SVG loading icon.
+ */
 export const LoadingIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg width={24} height={24} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
         <style>

@@ -11,6 +11,15 @@ import useUserStore from "@/stores/UserState";
 import useIsUserLoaded from "@/hooks/useIsUserLoaded";
 import Link from "next/link";
 
+/**
+ * A button that displays the current user's profile picture and username.
+ * If the user is not logged in, it displays a "ورود / ثبت نام" link instead.
+ *
+ * @returns A `Popover` component with a `PopoverTrigger` inside a `Link` component.
+ * The `PopoverTrigger` contains an `Image` that displays the current user's
+ * profile picture. The `PopoverContent` contains a paragraph with the username
+ * and a separator, and a `Button` that logs the user out when clicked.
+ */
 const UserProfile: React.FC = () => {
     const [pending, mutate] = useTransition();
 

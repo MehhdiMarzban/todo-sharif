@@ -5,6 +5,19 @@ interface TabsAuthProps {
     SigninComponent: React.FC;
     SignupComponent: React.FC;
 }
+/**
+ * A component that renders a signin/signup tabs.
+ *
+ * @example
+ * import Signin from "./Signin";
+ * import Signup from "./Signup";
+ *
+ * <TabsAuth SigninComponent={Signin} SignupComponent={Signup} />
+ *
+ * @param {React.FC} SigninComponent - The signin component.
+ * @param {React.FC} SignupComponent - The signup component.
+ * @returns {React.ReactElement} - The TabsAuth component.
+ */
 const TabsAuth: React.FC<TabsAuthProps> = ({ SigninComponent, SignupComponent }) => {
     return (
         <Tabs className="shrink-0" dir="rtl" defaultValue="signin">
