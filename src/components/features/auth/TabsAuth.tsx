@@ -10,7 +10,7 @@ const TabsAuth: React.FC<TabsAuthProps> = ({ SigninComponent, SignupComponent })
         <Tabs>
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">ورود</TabsTrigger>
-                <TabsTrigger value="password">ثبت نام</TabsTrigger>
+                <TabsTrigger value="signup">ثبت نام</TabsTrigger>
             </TabsList>
             <TabsContent value="signin">
                 <SigninComponent />
