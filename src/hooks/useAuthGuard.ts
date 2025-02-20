@@ -12,15 +12,17 @@ import useUserStore from "@/stores/UserState";
  */
 const useAuthGuard = (redirectPath = "/") => {
     const router = useRouter();
-    const { currentUser } = useUserStore();
+    const { currentUser, loading, setLoading } = useUserStore();
 
     useEffect(() => {
         if (currentUser) {
+            //* stop loading and redirect to "/"
+            setLoading(false);
             router.replace(redirectPath);
         }
     }, [currentUser, router, redirectPath]);
 
-    return currentUser;
+    return { currentUser, loading };
 };
 
 export default useAuthGuard;

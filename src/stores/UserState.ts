@@ -8,7 +8,7 @@ import { toast } from "sonner";
 export type UserState = {
     users: User[];
     currentUser?: User;
-    totalUsers: number;
+    loading: boolean;
 };
 
 export type UserActions = {
@@ -16,6 +16,7 @@ export type UserActions = {
     signinUser: (user: User) => boolean;
     logoutUser: () => void;
     removeUser: (id: string) => void;
+    setLoading: (loading: boolean) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -24,9 +25,10 @@ export type UserStore = UserState & UserActions;
 const useUserStore = create<UserStore>()(
     persist(
         (set) => ({
+            loading: true,
             users: [],
             currentUser: undefined,
-            totalUsers: 0,
+            setLoading: (loading: boolean) => set({ loading }),
             signupUser: (user: User) => {
                 let isSuccess = false;
                 set((state) => {
@@ -41,7 +43,6 @@ const useUserStore = create<UserStore>()(
                         return {
                             users: [...state.users, newUser],
                             currentUser: user,
-                            totalUsers: state.users.length,
                         };
                     }
                 });
@@ -72,7 +73,6 @@ const useUserStore = create<UserStore>()(
                 set((state) => {
                     return {
                         users: state.users.filter((user) => user.id !== id),
-                        totalUsers: state.users.length,
                     };
                 }),
             logoutUser: () =>
@@ -90,6 +90,13 @@ const useUserStore = create<UserStore>()(
         {
             name: "sharif-user-storage", //* storage name
             storage: createJSONStorage(() => localStorage), //* save and read from local storage
+            partialize: ({users, currentUser}) => {
+                return {
+                    users,
+                    currentUser,
+                }
+            }
+            
         }
     )
 );
