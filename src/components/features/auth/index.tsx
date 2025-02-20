@@ -6,7 +6,7 @@ import useAuthGuard from "@/hooks/useAuthGuard";
 
 const Auth: React.FC = () => {
     //* this hook check if user is logged in then redirect to "/"
-    const { currentUser, loading } = useAuthGuard();
+    const { currentUser, loading } = useAuthGuard(true);
     if (currentUser || loading) return null;
 
     return (

@@ -6,24 +6,24 @@ import useUserStore from "@/stores/UserState";
 
 
 /**
- * A custom hook that guards routes by checking if a user is logged in.
- * If the user is logged in, it redirects to the specified path.
+ * This hook checks if the user is logged in and redirects to the specified path
+ * if so. The hook returns an object with the `currentUser` and `loading` states.
  *
- * @param {string} redirectPath - The path to redirect to if the user is logged in. Defaults to "/".
- * @returns {Object} An object containing the current user and loading state.
- * @returns {Object.currentUser} The current user information.
- * @returns {boolean} loading - A flag indicating if the user authentication state is being loaded.
+ * @param {boolean} redirect - If true, the user is redirected to the specified path.
+ * @param {string} redirectPath - The path to redirect to. Defaults to "/".
+ * @returns {{currentUser: User | null, loading: boolean}}
  */
-
-const useAuthGuard = (redirectPath = "/") => {
+const useAuthGuard = (redirect = false, redirectPath = "/") => {
     const router = useRouter();
     const { currentUser, loading, setLoading } = useUserStore();
 
     useEffect(() => {
         setLoading(false);
         if (currentUser) {
-            //* stop loading and redirect to "/"
-            router.replace(redirectPath);
+            if (redirect) {
+                //* stop loading and redirect to "/"
+                router.replace(redirectPath);
+            }
         }
     }, [currentUser, router, redirectPath]);
 
