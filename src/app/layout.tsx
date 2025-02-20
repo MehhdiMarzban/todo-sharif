@@ -19,7 +19,7 @@ export default function RootLayout({
         <html lang="fa" dir="rtl">
             <body className={`${AppFont.variable} font-sans antialiased`}>
                 <Header />
-                <main className="container min-h-screen">{children}</main>
+                <main className="container min-h-screen py-4">{children}</main>
                 <Footer />
             </body>
         </html>
