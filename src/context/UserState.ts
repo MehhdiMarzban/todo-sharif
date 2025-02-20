@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 import { User } from "@/types";
+import { toast } from "sonner";
 
 //* type definitions
 export type UserState = {
@@ -31,8 +32,10 @@ const useUserStore = create<UserStore>()(
                 set((state) => {
                     const isExist = state.users.find((u) => u.username === user.username);
                     if (isExist) {
+                        toast.error("نام کاربری تکراری است");
                         return {};
                     } else {
+                        toast.success("ثبت نام با موفقیت انجام شد");
                         isSuccess = true;
                         const newUser = { ...user, id: Date.now().toString() };
                         return {
@@ -51,11 +54,13 @@ const useUserStore = create<UserStore>()(
                         (u) => u.username === user.username && u.password === user.password
                     );
                     if (currentUser) {
+                        toast.success(`خوش اومدی ${currentUser.username}`);
                         isSuccess = true;
                         return {
                             currentUser,
                         };
                     } else {
+                        toast.error("نام کاربری یا رمز عبور اشتباه است");
                         return {
                             currentUser: undefined,
                         };
@@ -70,7 +75,17 @@ const useUserStore = create<UserStore>()(
                         totalUsers: state.users.length,
                     };
                 }),
-            logoutUser: () => set((state) => ({ currentUser: undefined })),
+            logoutUser: () =>
+                set((state) => {
+                    if (state.currentUser) {
+                        toast.success(`خداحافظ ${state.currentUser.username}`);
+                        return {
+                            currentUser: undefined,
+                        };
+                    } else {
+                        return {};
+                    }
+                }),
         }),
         {
             name: "sharif-user-storage", //* storage name
