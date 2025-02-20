@@ -6,8 +6,8 @@ import useAuthGuard from "@/hooks/useAuthGuard";
 
 const Auth: React.FC = () => {
     //* this hook check if user is logged in then redirect to "/"
-    const {currentUser, loading} = useAuthGuard();
-    if(currentUser || loading) return null;
+    const { currentUser, loading } = useAuthGuard();
+    if (currentUser || loading) return null;
 
     return (
         <div className="max-w-lg mx-auto">
