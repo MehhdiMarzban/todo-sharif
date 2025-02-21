@@ -9,10 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerDescription,
-    DrawerFooter,
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
@@ -24,9 +22,9 @@ import TodoForm from "./TodoForm";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
 const TriggerButton = (
-    <Button className="w-full max-w-md">
+    <Button className="max-w-sm">
         <PlusCircleIcon />
-        افزودن تسک
+        <span className="hidden md:flex">افزودن تسک</span>
     </Button>
 );
 
@@ -44,7 +42,7 @@ export default () => {
                     <DialogTitle>اضافه کردن تسک جدید</DialogTitle>
                 </DialogHeader>
                 <TodoForm onClose={() => setOpen(false)} />
-                
+
                 {/* //* to prevent aria-accessability warning error */}
                 <DialogDescription></DialogDescription>
             </DialogContent>
