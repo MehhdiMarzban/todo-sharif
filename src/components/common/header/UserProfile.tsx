@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useTransition } from "react";
 import { LogOut } from "lucide-react";
@@ -9,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Separator } from "@/components/ui/separator";
 import useUserStore from "@/stores/UserState";
 import useIsUserLoaded from "@/hooks/useIsUserLoaded";
-import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * A button that displays the current user's profile picture and username.
@@ -27,7 +28,7 @@ const UserProfile: React.FC = () => {
     const { loading } = useIsUserLoaded();
 
     if (loading) {
-        return <LoadingIcon className="size-9 stroke-primary text-white" />;
+        return <Skeleton className="size-9 rounded-full bg-secondary" />;
     }
 
     if (!currentUser) {
