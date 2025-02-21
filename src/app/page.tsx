@@ -1,3 +1,3 @@
 export default function Home() {
-    return <div className="flex items-center justify-items-center">سلام</div>;
+    return <div className="flex min-h-screen">سلام</div>;
 }
