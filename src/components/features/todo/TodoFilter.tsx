@@ -1,11 +1,12 @@
 "use client";
+import { type MouseEvent, useState } from "react";
+import { CheckIcon, FilterIcon, XIcon } from "lucide-react";
+import { useQueryState } from "nuqs";
+
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { todoStateValues } from "@/types/Todo";
-import { CheckIcon, FilterIcon } from "lucide-react";
-import { useQueryState } from "nuqs";
-import { type MouseEvent, useState } from "react";
 
 export const TodoFilter: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -50,6 +51,19 @@ export const TodoFilter: React.FC = () => {
                 </div>
             </PopoverContent>
         </Popover>
+    );
+};
+
+export const TodoResetFilter: React.FC = () => {
+    const [filter, setFilter] = useQueryState("filter");
+    if (!filter) return <span className="size-4" />;
+    return (
+        <button
+            type="button"
+            onClick={() => setFilter(null)}
+            className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground cursor-pointer">
+            <XIcon className="size-4" />
+        </button>
     );
 };
 

@@ -1,14 +1,17 @@
 "use client";
 
-import TodoFilter from "./TodoFilter";
+import TodoFilter, { TodoResetFilter } from "./TodoFilter";
 import TodoModal from "./TodoModal";
 
 const Todo: React.FC = () => {
     return (
-        <div className="flex flex-col items-start">
-            <div className="flex flex-row justify-around items-center bg-amber-200">
+        <div className="flex flex-col items-start w-full">
+            <div className="flex flex-row justify-around items-center w-full">
                 <TodoModal />
-                <TodoFilter />
+                <div className="flex flex-row gap-1">
+                    <TodoFilter />
+                    <TodoResetFilter />
+                </div>
             </div>
         </div>
     );
