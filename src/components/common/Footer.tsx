@@ -1,5 +1,10 @@
 import { siteConfig } from "@/config/site";
 
+/**
+ * Footer component. This component is the footer of the site.
+ * It displays the author of the site and the current year.
+ * @returns The footer component.
+ */
 const Footer: React.FC = () => {
     return (
         <footer className="bg-primary text-primary-foreground text-center py-1">
