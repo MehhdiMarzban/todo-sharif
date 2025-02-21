@@ -8,6 +8,7 @@ const Todo: React.FC = () => {
         <div className="flex flex-col items-start w-full">
             <div className="flex flex-row justify-around items-center w-full">
                 <TodoModal />
+                {/* todo filter management */}
                 <div className="flex flex-row gap-1">
                     <TodoFilter />
                     <TodoResetFilter />
