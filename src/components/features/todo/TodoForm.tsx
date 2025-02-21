@@ -40,10 +40,11 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
         },
     });
 
-    const { addTodo, currentUser } = useAppStore();
+    const addTodo = useAppStore(state => state.addTodo);
 
     const onSubmit = (values: TodoFormType) => {
-        if (currentUser) addTodo(values, currentUser);
+        addTodo(values);
+        onClose();
     };
 
     return (
@@ -143,7 +144,3 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
 };
 
 export default TodoForm;
-
-// onKeyDown={(e) => {
-//     if (e.key === "Enter") handleSubmit();
-// }}

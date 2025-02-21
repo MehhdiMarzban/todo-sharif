@@ -19,7 +19,7 @@ export type UserActions = {
     logoutUser: () => void;
     removeUser: (id: string) => void;
     setLoading: (loading: boolean) => void;
-    addTodo: (todo: TodoFormType, user: User) => void;
+    addTodo: (todo: TodoFormType) => void;
 };
 
 export type AppStore = UserState & UserActions;
@@ -90,9 +90,15 @@ const useAppStore = create<AppStore>()(
                         return {};
                     }
                 }),
-            addTodo: (todo: TodoFormType, user: User) =>
+            addTodo: (todo: TodoFormType) =>
                 set((state) => {
-                    if (state.currentUser && user) {
+                    if (state.currentUser) {
+                        //* check number of todos <= 10
+                        if (state.currentUser.todos && state.currentUser.todos?.length > 10) {
+                            toast.warning("به دلیل محدودیت حافظه تنها 10 تسک میتوان اضافه کرد !");
+                            return {};
+                        }
+
                         //* initial new todo
                         const date = todo.date.toISOString();
                         const newTodo: Todo = { ...todo, id: date, date, user: state.currentUser };
@@ -108,13 +114,12 @@ const useAppStore = create<AppStore>()(
                         };
 
                         const newUserList = state.users.map((u) => {
-                            console.log(u.id, user.id);
                             if (u.id === state.currentUser?.id) {
                                 return { ...userData };
                             } else {
                                 return u;
                             }
-                        })
+                        });
 
                         toast.success("با موفقیت افزوده شد!");
                         return {
