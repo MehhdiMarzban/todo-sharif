@@ -39,7 +39,7 @@ export const TodoFilter: React.FC = () => {
                             name={filterOption}
                             onClick={handleFilter}
                             className="justify-between">
-                            {filterOption.charAt(0).toUpperCase() + filterOption.slice(1)}
+                            {filterOption}
                             <CheckIcon
                                 className={cn(
                                     filter === filterOption ? "text-primary" : "text-transparent"
