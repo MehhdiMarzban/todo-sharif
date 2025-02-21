@@ -1,15 +1,10 @@
 import User from "./User";
 
-export enum TodoState {
-    none = "در انتظار",
-    doing = "در حال انجام",
-    done = "تکمیل شده",
-}
-export const todoStateValues = Object.values(TodoState); 
+export const todoStateValues = ["در انتظار", "در حال انجام", "تکمیل شده"] as const;
 export default interface Todo {
     id: string;
-    title : string;
+    title: string;
     date: string;
     user: User;
-    state: TodoState;
+    state: (typeof todoStateValues)[number];
 }

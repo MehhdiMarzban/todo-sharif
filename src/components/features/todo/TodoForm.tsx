@@ -25,6 +25,7 @@ import { todoStateValues } from "@/types/Todo";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import useAppStore from "@/stores/AppState";
 
 interface TodoFormProps {
     onClose: () => void;
@@ -35,15 +36,20 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
         defaultValues: {
             title: "",
             date: new Date(),
-            state: "none",
+            state: todoStateValues[0],
         },
     });
-    const handleSubmit = async () => {};
+
+    const { addTodo, currentUser } = useAppStore();
+
+    const onSubmit = (values: TodoFormType) => {
+        if (currentUser) addTodo(values, currentUser);
+    };
 
     return (
         <div className="flex flex-1 flex-col gap-3">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-3">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                     <FormField
                         control={form.control}
                         name="title"
@@ -89,7 +95,9 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
                         name="date"
                         render={({ field }) => (
                             <FormItem className="flex flex-col max-w-sm w-full mx-auto">
-                                <FormLabel asChild><p>زمان تسک</p></FormLabel>
+                                <FormLabel asChild>
+                                    <p>زمان تسک</p>
+                                </FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>
@@ -113,9 +121,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
                                             mode="single"
                                             selected={field.value}
                                             onSelect={field.onChange}
-                                            disabled={(date : Date) =>
-                                                date <= new Date()
-                                            }
+                                            disabled={(date: Date) => date <= new Date()}
                                             initialFocus
                                         />
                                     </PopoverContent>
@@ -129,7 +135,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
                     />
                 </form>
             </Form>
-            <Button onClick={form.handleSubmit(handleSubmit)} className="mt-1">
+            <Button onClick={form.handleSubmit(onSubmit)} className="mt-1">
                 افزودن
             </Button>
         </div>

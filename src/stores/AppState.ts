@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { User } from "@/types";
+import { Todo, User } from "@/types";
 import { toast } from "sonner";
+import { TodoFormType } from "@/validations/todo";
 
 //* type definitions
 export type UserState = {
     users: User[];
+    todos: Todo[];
     currentUser?: User;
     loading: boolean;
 };
@@ -17,16 +19,18 @@ export type UserActions = {
     logoutUser: () => void;
     removeUser: (id: string) => void;
     setLoading: (loading: boolean) => void;
+    addTodo: (todo: TodoFormType, user: User) => void;
 };
 
-export type UserStore = UserState & UserActions;
+export type AppStore = UserState & UserActions;
 
 //* initial zustand
-const useAppStore = create<UserStore>()(
+const useAppStore = create<AppStore>()(
     persist(
         (set) => ({
             loading: true,
             users: [],
+            todos: [],
             currentUser: undefined,
             setLoading: (loading: boolean) => set({ loading }),
             signupUser: (user: User) => {
@@ -42,7 +46,7 @@ const useAppStore = create<UserStore>()(
                         const newUser = { ...user, id: Date.now().toString() };
                         return {
                             users: [...state.users, newUser],
-                            currentUser: user,
+                            currentUser: newUser,
                         };
                     }
                 });
@@ -86,14 +90,52 @@ const useAppStore = create<UserStore>()(
                         return {};
                     }
                 }),
+            addTodo: (todo: TodoFormType, user: User) =>
+                set((state) => {
+                    if (state.currentUser && user) {
+                        //* initial new todo
+                        const date = todo.date.toISOString();
+                        const newTodo: Todo = { ...todo, id: date, date, user: state.currentUser };
+
+                        //* integrate new todo with currentUser and usersList
+                        let previousUserTodos: Todo[] = [];
+                        if (state.currentUser?.todos) {
+                            previousUserTodos = [...state.currentUser.todos];
+                        }
+                        const userData = {
+                            ...state.currentUser,
+                            todos: [...previousUserTodos, newTodo],
+                        };
+
+                        const newUserList = state.users.map((u) => {
+                            console.log(u.id, user.id);
+                            if (u.id === state.currentUser?.id) {
+                                return { ...userData };
+                            } else {
+                                return u;
+                            }
+                        })
+
+                        toast.success("با موفقیت افزوده شد!");
+                        return {
+                            todos: [...state.todos, newTodo],
+                            currentUser: { ...userData },
+                            users: [...newUserList],
+                        };
+                    } else {
+                        toast.error("لطفا وارد شوید !");
+                        return {};
+                    }
+                }),
         }),
         {
             name: "sharif-user-storage", //* storage name
             storage: createJSONStorage(() => localStorage), //* save and read from local storage
-            partialize: ({ users, currentUser }) => {
+            partialize: ({ users, currentUser, todos }) => {
                 return {
                     users,
                     currentUser,
+                    todos,
                 };
             },
         }
