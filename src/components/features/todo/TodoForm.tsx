@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
+import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns-jalali";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { TodoFormType, todoValidation } from "@/validations/todo";
 import {
     Form,
@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/select";
 import { todoStateValues } from "@/types/Todo";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 
