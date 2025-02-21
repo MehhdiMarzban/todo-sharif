@@ -2,7 +2,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn, fromNow } from "@/lib/utils";
 import { Todo } from "@/types";
-import { TodoState } from "@/types/Todo";
+import { todoStateValues } from "@/types/Todo";
 
 interface TodoItemProps {
     todo: Todo;
@@ -10,23 +10,26 @@ interface TodoItemProps {
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     const { id, state, title, date } = todo;
     return (
-        <div className="rounded-md border bg-card p-2">
+        <div className={cn("rounded-md border bg-card p-2", {
+            "bg-primary/5" : state === todoStateValues[2], //* for done todo
+            "bg-chart-4/20" : state === todoStateValues[1], //* for doing todo
+
+        })}>
             <div className="flex flex-col">
                 <label
                     htmlFor={id}
-                    className={cn("flex w-fit cursor-pointer items-center gap-2 text-sm", {
-                        "text-muted-foreground line-through": state === TodoState.done,
+                    className={cn("flex w-full cursor-pointer items-center gap-2 text-sm", {
+                        "text-muted-foreground line-through": state === todoStateValues[2], //* for done todo
                     })}>
                     <Checkbox
                         id={id}
-                        className={cn({ "text-chart-3": state === TodoState.doing })}
-                        checked={state === TodoState.done}
+                        checked={state === todoStateValues[2]}
                         // onCheckedChange={handleComplete}
                     />
-                    <p>{title}</p>
+                    <p className="text-sm md:text-base truncate">{title}</p>
                 </label>
                 <div className="flex items-end justify-between gap-2">
-                    <p className="flex-1 text-[10px] text-muted-foreground">{fromNow(date)}</p>
+                    <p className="flex-1 text-xs md:text-sm mt-1 md:mt-2 text-muted-foreground">{fromNow(date)}</p>
                     {/* <TodoEdit todo={todo} />
                     <TodoRemove todo={todo} /> */}
                 </div>
