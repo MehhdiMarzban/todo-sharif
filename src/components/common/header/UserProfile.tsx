@@ -28,7 +28,7 @@ const UserProfile: React.FC = () => {
     const { loading } = useIsUserLoaded();
 
     if (loading) {
-        return <Skeleton className="size-9 rounded-full bg-secondary" />;
+        return <Skeleton className="size-9 rounded-full" />;
     }
 
     if (!currentUser) {
