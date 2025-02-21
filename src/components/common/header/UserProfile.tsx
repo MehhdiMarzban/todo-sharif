@@ -8,7 +8,7 @@ import { LoadingIcon } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import useUserStore from "@/stores/UserState";
+import useAppStore from "@/stores/AppState";
 import useIsUserLoaded from "@/hooks/useIsUserLoaded";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -24,7 +24,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const UserProfile: React.FC = () => {
     const [pending, mutate] = useTransition();
 
-    const { currentUser, logoutUser } = useUserStore();
+    const { currentUser, logoutUser } = useAppStore();
     const { loading } = useIsUserLoaded();
 
     if (loading) {

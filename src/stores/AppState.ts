@@ -22,7 +22,7 @@ export type UserActions = {
 export type UserStore = UserState & UserActions;
 
 //* initial zustand
-const useUserStore = create<UserStore>()(
+const useAppStore = create<UserStore>()(
     persist(
         (set) => ({
             loading: true,
@@ -90,15 +90,14 @@ const useUserStore = create<UserStore>()(
         {
             name: "sharif-user-storage", //* storage name
             storage: createJSONStorage(() => localStorage), //* save and read from local storage
-            partialize: ({users, currentUser}) => {
+            partialize: ({ users, currentUser }) => {
                 return {
                     users,
                     currentUser,
-                }
-            }
-            
+                };
+            },
         }
     )
 );
 
-export default useUserStore;
+export default useAppStore;
