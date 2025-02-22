@@ -1,6 +1,6 @@
 import { Footer, Header } from "@/components/common";
 
-const TodoLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
+const AuthLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
         <div className="min-h-screen flex flex-col justify-between">
             <Header />
@@ -10,4 +10,4 @@ const TodoLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     );
 };
 
-export default TodoLayout;
+export default AuthLayout;
