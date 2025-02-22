@@ -1,5 +1,5 @@
 import { Menu } from "lucide-react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerDescription, DrawerTrigger } from "@/components/ui/drawer";
 import DesktopMenu from "./DesktopMenu";
 import { Button } from "@/components/ui/button";
 import { DialogTitle } from "@/components/ui/dialog";
@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
  * - `DesktopMenu`: A component that renders the menu items.
  *
  * The drawer is hidden on medium and larger screens (`md:hidden`) and is positioned
- * with a margin at the top and right (`mt-2 mr-1`). The drawer content takes up a
+ * with a margin at the top and right (`mt-2 mr-2`). The drawer content takes up a
  * percentage of the screen width (`w-[65%] sm:w-[45%]`) and is styled to have no
  * rounded corners (`rounded-none`).
  *
@@ -28,14 +28,16 @@ import { cn } from "@/lib/utils";
 const MobileMenu: React.FC<React.ComponentProps<"div">> = ({ className }) => {
     return (
         <Drawer direction="right">
-            <DrawerTrigger asChild className={cn("mt-2 mr-1 z-50", className)}>
+            <DrawerTrigger asChild className={cn("mt-2 mx-2 z-50", className)}>
                 <Button variant="ghost" size="icon">
                     <Menu className="h-5 w-5" />
                 </Button>
             </DrawerTrigger>
 
             <DrawerContent className="h-full w-[65%] sm:w-[45%] mt-0 right-0 left-auto rounded-none">
+                {/* //* to prevent warnings */}
                 <DialogTitle></DialogTitle>
+                <DrawerDescription></DrawerDescription>
                 <DesktopMenu className="w-full h-full border-none shadow-none" />
             </DrawerContent>
         </Drawer>
