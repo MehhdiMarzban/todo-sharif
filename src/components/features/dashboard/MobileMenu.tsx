@@ -3,6 +3,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import DesktopMenu from "./DesktopMenu";
 import { Button } from "@/components/ui/button";
 import { DialogTitle } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 /**
  * `MobileMenu` is a React functional component that renders a mobile-friendly
@@ -24,10 +25,10 @@ import { DialogTitle } from "@/components/ui/dialog";
  *
  * @returns {JSX.Element} The rendered mobile menu component.
  */
-const MobileMenu: React.FC = () => {
+const MobileMenu: React.FC<React.ComponentProps<"div">> = ({ className }) => {
     return (
         <Drawer direction="right">
-            <DrawerTrigger asChild className="md:hidden mt-2 mr-1 z-50">
+            <DrawerTrigger asChild className={cn("mt-2 mr-1 z-50", className)}>
                 <Button variant="ghost" size="icon">
                     <Menu className="h-5 w-5" />
                 </Button>

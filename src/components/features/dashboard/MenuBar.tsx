@@ -15,7 +15,7 @@ import MobileMenu from "./MobileMenu";
 const Menubar: React.FC = () => {
     return (
         <>
-            <MobileMenu />
+            <MobileMenu className="md:hidden" />
             <DesktopMenu className="hidden md:block" />
         </>
     );
