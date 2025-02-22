@@ -12,6 +12,17 @@ interface TodoDeleteProps {
     todo: Todo;
     onClose?: () => void;
 }
+/**
+ * A component that renders a button that triggers a modal
+ * for deleting a given task. The modal renders a form with
+ * a single button that triggers the deletion of the task.
+ *
+ * The component accepts a single prop, `todo`, which is the
+ * task to be deleted.
+ *
+ * @param {{todo: Todo}} props - The component props.
+ * @param {Todo} props.todo - The task to be deleted.
+ */
 const TodoDelete: React.FC<TodoDeleteProps> = ({ todo }) => {
     return (
         <TodoModal
@@ -23,6 +34,19 @@ const TodoDelete: React.FC<TodoDeleteProps> = ({ todo }) => {
     );
 };
 
+/**
+ * TodoDeleteForm component renders a confirmation dialog for deleting a todo item.
+ * 
+ * It displays the title of the todo and provides a button to confirm deletion.
+ * The deletion process is handled with a transition to provide feedback during
+ * the asynchronous operation.
+ * 
+ * @component
+ * @param {TodoDeleteProps} props - The properties for the TodoDeleteForm component.
+ * @param {Todo} props.todo - The todo item to be deleted.
+ * 
+ * @returns {JSX.Element} The rendered TodoDeleteForm component.
+ */
 const TodoDeleteForm: React.FC<TodoDeleteProps> = ({ todo }) => {
     const { deleteTodo } = useAppStore();
     const [isPending, startTransition] = useTransition();

@@ -6,6 +6,21 @@ interface TodoCountProps {
     isDashboard?: boolean;
 }
 
+/**
+ * A component that displays the count of todos.
+ *
+ * @component
+ * @param {TodoCountProps} props - The props for the TodoCount component.
+ * @param {boolean} [props.isDashboard=false] - Flag indicating if the count is for the dashboard.
+ *
+ * @returns {JSX.Element} The rendered TodoCount component displaying the number of todos.
+ *
+ * @remarks
+ * - Utilizes the `useAppStore` hook to retrieve todos data.
+ * - Uses `NumberFlow` to animate the display of the todo count.
+ * - Displays the total count of all todos when `isDashboard` is true, otherwise displays the count of the current user's todos.
+ */
+
 const TodoCount: React.FC<TodoCountProps> = ({ isDashboard = false }) => {
     const { currentUser, todos } = useAppStore();
     return (
