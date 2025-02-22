@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useAppStore from "@/stores/AppState";
+import { siteConfig } from "@/config/site";
 
 /**
  * This hook checks if the user is logged in and redirects to the specified path
@@ -10,9 +11,11 @@ import useAppStore from "@/stores/AppState";
  *
  * @param {boolean} redirect - If true, the user is redirected to the specified path.
  * @param {string} redirectPath - The path to redirect to. Defaults to "/".
+ * @param {boolean} haveAdminAccess - Just admin can access to this page.
+ * 
  * @returns {{currentUser: User | null, loading: boolean}}
  */
-const useAuthGuard = (redirect = false, redirectPath = "/") => {
+const useAuthGuard = (redirect = false, redirectPath = "/", haveAdminAccess = false) => {
     const router = useRouter();
     const { currentUser, loading, setLoading } = useAppStore();
 
@@ -20,8 +23,11 @@ const useAuthGuard = (redirect = false, redirectPath = "/") => {
         setLoading(false);
         if (currentUser) {
             if (redirect) {
-                //* stop loading and redirect to "/"
-                router.replace(redirectPath);
+                if (haveAdminAccess && currentUser.username === siteConfig.admin.username) {
+                } else {
+                    //* stop loading and redirect to "/"
+                    router.replace(redirectPath);
+                }
             }
         }
     }, [currentUser, router, redirectPath]);
