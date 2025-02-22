@@ -1,30 +1,46 @@
 "use client";
 
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion } from "motion/react";
 import { useQueryState } from "nuqs";
 import useAppStore from "@/stores/AppState";
-import { todoStateValues } from "@/types/Todo";
+import Todo, { todoStateValues } from "@/types/Todo";
 import TodoEmpty from "./TodoEmpty";
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem";
+
+interface TodoListProps {
+    isDashboard?: boolean;
+    allTodos?: Todo[];
+}
 
 /**
- * TodoList component that displays a list of todos based on the current filter.
- * 
- * This component uses the `useQueryState` hook to get the current filter state and 
- * the `useAppStore` hook to get the current user's todos. It filters the todos based 
- * on the selected filter and displays them using the `AnimatePresence` and `motion` 
- * components from the `motion/react` library for animations.
- * 
- * If there are no todos, it displays the `TodoEmpty` component.
- * 
+ * TodoList component displays a list of todos with optional filtering and animation.
+ *
  * @component
- * @returns {JSX.Element} The rendered component.
+ * @param {TodoListProps} props - The props for the TodoList component.
+ * @param {boolean} [props.isDashboard=false] - Indicates if the component is used in a dashboard context.
+ * @param {Todo[]} [props.allTodos] - An optional array of all todos to display.
+ *
+ * @returns {JSX.Element} The rendered TodoList component.
+ *
+ * @example
+ * <TodoList isDashboard={true} allTodos={todos} />
+ *
+ * @remarks
+ * - If `allTodos` is not provided, the component will use the current user's todos from the app store.
+ * - The component filters todos based on the `filter` query state.
+ * - Uses `AnimatePresence` and `motion` from the `motion/react` library for animations.
  */
-const TodoList: React.FC = () => {
+const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) => {
     const [filter] = useQueryState("filter");
     const { currentUser } = useAppStore();
-    
-    const todos = currentUser?.todos || [];
+
+    //* checking todos;
+    let todos: Todo[] = [];
+    if (allTodos) {
+        todos = allTodos;
+    } else {
+        todos = currentUser?.todos || [];
+    }
 
     //* filter todos by selected filter
     const filteredTodos = todos?.filter((todo) => {
@@ -54,7 +70,7 @@ const TodoList: React.FC = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.15 }}>
-                            <TodoItem todo={todo} />
+                            <TodoItem isDashboard={isDashboard} todo={todo} />
                         </motion.div>
                     ))}
                 </AnimatePresence>
