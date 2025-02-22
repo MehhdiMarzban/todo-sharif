@@ -142,14 +142,44 @@ const useAppStore = create<AppStore>()(
                         state.currentUser.todos = state.currentUser?.todos?.filter(
                             (t) => t.id !== todo.id
                         );
+                        //* update users
+                        const findUserIndex = state.users.findIndex(
+                            (user) => user.id === todo.user.id
+                        );
+                        state.users[findUserIndex].todos = state.currentUser?.todos;
                     }
-                    const findUserIndex = state.users.findIndex((user) => user.id === todo.user.id);
-                    state.users[findUserIndex].todos = state.users[findUserIndex].todos?.filter(
-                        (t) => t.id !== todo.id
-                    );
+
                     toast.success("با موفقیت حذف شد !");
                 }),
-           
+            updateTodo: (todo) =>
+                set((state) => {
+                    //* update todos
+                    state.todos = state.todos.map((t) => {
+                        if (t.id === todo.id) {
+                            return todo;
+                        } else {
+                            return t;
+                        }
+                    });
+
+                    //* update currentUser
+                    if (state.currentUser && state.currentUser.todos) {
+                        state.currentUser.todos = state.currentUser?.todos?.map((t) => {
+                            if (t.id === todo.id) {
+                                return todo;
+                            } else {
+                                return t;
+                            }
+                        });
+                        //* update users
+                        const findUserIndex = state.users.findIndex(
+                            (user) => user.id === todo.user.id
+                        );
+                        state.users[findUserIndex].todos = state.currentUser?.todos;
+                    }
+                    toast.success("با موفقیت بروز شد !");
+
+                }),
         })),
         {
             name: "sharif-user-storage", //* storage name
