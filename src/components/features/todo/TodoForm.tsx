@@ -30,6 +30,20 @@ import useAppStore from "@/stores/AppState";
 interface TodoFormProps {
     onClose?: () => void;
 }
+
+/**
+ * TodoForm component allows users to add a new todo item with a title, state, and date.
+ * It uses react-hook-form for form handling and validation with zod.
+ * 
+ * @component
+ * @param {Object} props - Component props
+ * @param {Function} [props.onClose] - Optional callback function to be called when the form is closed
+ * 
+ * @returns {JSX.Element} The rendered TodoForm component
+ * 
+ * @example
+ * <TodoForm onClose={() => console.log('Form closed')} />
+ */
 export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
     const form = useForm<TodoFormType>({
         resolver: zodResolver(todoValidation),

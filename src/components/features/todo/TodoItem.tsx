@@ -11,6 +11,27 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 interface TodoItemProps {
     todo: Todo;
 }
+
+/**
+ * A component that represents a single todo item.
+ *
+ * @component
+ * @param {TodoItemProps} props - The properties for the TodoItem component.
+ * @param {Todo} props.todo - The todo item to be displayed.
+ *
+ * @returns {JSX.Element} The rendered TodoItem component.
+ *
+ * @example
+ * const todo = {
+ *   id: '1',
+ *   state: 'todo',
+ *   title: 'Learn TypeScript',
+ *   date: new Date(),
+ *   user: { username: 'mehdi_marzban' }
+ * };
+ *
+ * <TodoItem todo={todo} />
+ */
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     const { id, state, title, date } = todo;
     const { updateTodo } = useAppStore();
