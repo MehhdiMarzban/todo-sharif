@@ -137,8 +137,8 @@ const useAppStore = create<AppStore>()(
                 }),
             deleteTodo: (todo) =>
                 set((state) => {
-                    state.todos = state.todos.filter((t) => t.id !== todo.id);
-                    if (state.currentUser && state.currentUser.todos) {
+                    if (state.currentUser) {
+                        state.todos = state.todos.filter((t) => t.id !== todo.id);
                         state.currentUser.todos = state.currentUser?.todos?.filter(
                             (t) => t.id !== todo.id
                         );
@@ -147,23 +147,24 @@ const useAppStore = create<AppStore>()(
                             (user) => user.id === todo.user.id
                         );
                         state.users[findUserIndex].todos = state.currentUser?.todos;
+                        toast.success("با موفقیت حذف شد !");
+                    } else {
+                        toast.error("لطفا وارد شوید !");
                     }
-
-                    toast.success("با موفقیت حذف شد !");
                 }),
             updateTodo: (todo) =>
                 set((state) => {
-                    //* update todos
-                    state.todos = state.todos.map((t) => {
-                        if (t.id === todo.id) {
-                            return todo;
-                        } else {
-                            return t;
-                        }
-                    });
+                    if (state.currentUser) {
+                        //* update todos
+                        state.todos = state.todos.map((t) => {
+                            if (t.id === todo.id) {
+                                return todo;
+                            } else {
+                                return t;
+                            }
+                        });
 
-                    //* update currentUser
-                    if (state.currentUser && state.currentUser.todos) {
+                        //* update currentUser
                         state.currentUser.todos = state.currentUser?.todos?.map((t) => {
                             if (t.id === todo.id) {
                                 return todo;
@@ -176,9 +177,10 @@ const useAppStore = create<AppStore>()(
                             (user) => user.id === todo.user.id
                         );
                         state.users[findUserIndex].todos = state.currentUser?.todos;
+                        toast.success("با موفقیت بروز شد !");
+                    } else {
+                        toast.error("لطفا وارد شوید !");
                     }
-                    toast.success("با موفقیت بروز شد !");
-
                 }),
         })),
         {
