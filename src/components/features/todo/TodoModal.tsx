@@ -23,7 +23,7 @@ import { useState } from "react";
 
 interface TodoModalProps {
     title: string;
-    withCancelButton: boolean;
+    withCancelButton?: boolean;
     FormRender: React.FC<{ onClose: () => void }>;
     TriggerButton: React.JSX.Element;
 }
@@ -31,7 +31,7 @@ const TodoModal: React.FC<React.PropsWithChildren<TodoModalProps>> = ({
     title = "",
     FormRender,
     TriggerButton,
-    withCancelButton,
+    withCancelButton = false,
 }) => {
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const [open, setOpen] = useState(false);
