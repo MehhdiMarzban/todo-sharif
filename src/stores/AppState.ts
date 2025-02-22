@@ -21,7 +21,8 @@ export type UserActions = {
     removeUser: (id: string) => void;
     setLoading: (loading: boolean) => void;
     addTodo: (todo: TodoFormType) => void;
-    deleteTodo: (todoId: Todo) => void;
+    deleteTodo: (todo: Todo) => void;
+    updateTodo: (todo: Todo) => void;
 };
 
 export type AppStore = UserState & UserActions;
@@ -105,33 +106,33 @@ const useAppStore = create<AppStore>()(
                         const date = todo.date.toISOString();
                         const newTodo: Todo = { ...todo, id: date, date, user: state.currentUser };
 
-                        //* integrate new todo with currentUser and usersList
                         let previousUserTodos: Todo[] = [];
                         if (state.currentUser?.todos) {
                             previousUserTodos = [...state.currentUser.todos];
                         }
+
                         const userData = {
                             ...state.currentUser,
                             todos: [...previousUserTodos, newTodo],
                         };
 
-                        const newUserList = state.users.map((u) => {
+                        //* update todos
+                        state.todos.push(newTodo);
+
+                        //* update current user
+                        state.currentUser = userData;
+
+                        //* update users list
+                        state.users = state.users.map((u) => {
                             if (u.id === state.currentUser?.id) {
-                                return { ...userData };
+                                return userData;
                             } else {
                                 return u;
                             }
                         });
-
                         toast.success("با موفقیت افزوده شد!");
-                        return {
-                            todos: [...state.todos, newTodo],
-                            currentUser: { ...userData },
-                            users: [...newUserList],
-                        };
                     } else {
                         toast.error("لطفا وارد شوید !");
-                        return {};
                     }
                 }),
             deleteTodo: (todo) =>
@@ -148,6 +149,7 @@ const useAppStore = create<AppStore>()(
                     );
                     toast.success("با موفقیت حذف شد !");
                 }),
+           
         })),
         {
             name: "sharif-user-storage", //* storage name
