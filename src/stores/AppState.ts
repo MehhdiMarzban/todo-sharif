@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 import { Todo, User } from "@/types";
 import { toast } from "sonner";
@@ -20,6 +21,7 @@ export type UserActions = {
     removeUser: (id: string) => void;
     setLoading: (loading: boolean) => void;
     addTodo: (todo: TodoFormType) => void;
+    deleteTodo: (todoId: Todo) => void;
 };
 
 export type AppStore = UserState & UserActions;
@@ -27,7 +29,7 @@ export type AppStore = UserState & UserActions;
 //* initial zustand
 const useAppStore = create<AppStore>()(
     persist(
-        (set) => ({
+        immer((set) => ({
             loading: true,
             users: [],
             todos: [],
@@ -94,7 +96,7 @@ const useAppStore = create<AppStore>()(
                 set((state) => {
                     if (state.currentUser) {
                         //* check number of todos <= 10
-                        if (state.currentUser.todos && state.currentUser.todos?.length > 10) {
+                        if (state.currentUser.todos && state.currentUser.todos?.length > 9) {
                             toast.warning("به دلیل محدودیت حافظه تنها 10 تسک میتوان اضافه کرد !");
                             return {};
                         }
@@ -132,7 +134,21 @@ const useAppStore = create<AppStore>()(
                         return {};
                     }
                 }),
-        }),
+            deleteTodo: (todo) =>
+                set((state) => {
+                    state.todos = state.todos.filter((t) => t.id !== todo.id);
+                    if (state.currentUser && state.currentUser.todos) {
+                        state.currentUser.todos = state.currentUser?.todos?.filter(
+                            (t) => t.id !== todo.id
+                        );
+                    }
+                    const findUserIndex = state.users.findIndex((user) => user.id === todo.user.id);
+                    state.users[findUserIndex].todos = state.users[findUserIndex].todos?.filter(
+                        (t) => t.id !== todo.id
+                    );
+                    toast.success("با موفقیت حذف شد !");
+                }),
+        })),
         {
             name: "sharif-user-storage", //* storage name
             storage: createJSONStorage(() => localStorage), //* save and read from local storage
