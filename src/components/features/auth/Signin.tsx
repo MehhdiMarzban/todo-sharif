@@ -23,15 +23,15 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import useUserStore from "@/stores/UserState";
+import useAppStore from "@/stores/AppState";
 
 /**
  * Signin component renders a user sign-in form using `react-hook-form`.
- * It validates the input data with Zod schema and handles user sign-in 
+ * It validates the input data with Zod schema and handles user sign-in
  * using the `signinUser` function from `useUserStore`.
- * 
- * The form includes fields for username and password, and upon successful 
- * login, the user is redirected to the home page. Displays input validation 
+ *
+ * The form includes fields for username and password, and upon successful
+ * login, the user is redirected to the home page. Displays input validation
  * messages and uses Next.js router for navigation.
  */
 
@@ -44,7 +44,7 @@ const Signin: React.FC = () => {
         },
     });
 
-    const { signinUser } = useUserStore();
+    const { signinUser } = useAppStore();
     const router = useRouter();
 
     const onSubmit = (values: AuthType) => {

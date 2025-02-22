@@ -2,8 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import useUserStore from "@/stores/UserState";
-
+import useAppStore from "@/stores/AppState";
 
 /**
  * This hook checks if the user is logged in and redirects to the specified path
@@ -15,7 +14,7 @@ import useUserStore from "@/stores/UserState";
  */
 const useAuthGuard = (redirect = false, redirectPath = "/") => {
     const router = useRouter();
-    const { currentUser, loading, setLoading } = useUserStore();
+    const { currentUser, loading, setLoading } = useAppStore();
 
     useEffect(() => {
         setLoading(false);

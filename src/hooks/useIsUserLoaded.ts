@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import useUserStore from "@/stores/UserState";
+import useAppStore from "@/stores/AppState";
 
 /**
  * Hook to check if the user data is loaded.
@@ -10,7 +10,7 @@ import useUserStore from "@/stores/UserState";
  * @returns {{currentUser: User | undefined, loading: boolean}}
  */
 const useIsUserLoaded = () => {
-    const { currentUser, loading, setLoading } = useUserStore();
+    const { currentUser, loading, setLoading } = useAppStore();
 
     useEffect(() => {
         setLoading(false);
