@@ -6,6 +6,17 @@ import useAppStore from "@/stores/AppState";
 import { Sparkles } from "lucide-react";
 import { toPersianDigits } from "number-persian";
 
+/**
+ * A component that displays a list of users in a grid layout.
+ *
+ * The component uses the `useAppStore` hook to retrieve the list of users.
+ * It renders a grid of cards, each representing a user. The card shows the user's username,
+ * their ID, and the number of tasks they have, represented by a badge.
+ *
+ * If there are no users, the component renders an empty state with a pulsing animation.
+ *
+ * @returns {JSX.Element} The rendered DashboardUsersPage component.
+ */
 const DashboardUsersPage: React.FC = () => {
     const { users } = useAppStore();
 
