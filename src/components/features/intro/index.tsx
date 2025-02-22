@@ -10,7 +10,7 @@ import { RocketIcon } from "lucide-react";
  */
 const Intro: React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center gap-2 text-center w-full">
+        <div className="flex flex-col items-center justify-center gap-2 text-center w-full animate-in fade-in zoom-in">
             <h1 className="max-w-4xl font-black text-2xl/snug md:text-4xl/snug lg:text-6xl/snug">
                 یک <span className="text-primary">مدیریت کننده تسک </span> که با Next.js 15 و
                 TailwindCss ساخته شده
