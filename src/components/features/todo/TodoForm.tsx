@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import useAppStore from "@/stores/AppState";
 
 interface TodoFormProps {
-    onClose: () => void;
+    onClose?: () => void;
 }
 export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
     const form = useForm<TodoFormType>({
@@ -44,7 +44,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onClose }) => {
 
     const onSubmit = (values: TodoFormType) => {
         addTodo(values);
-        onClose();
+        onClose?.();
     };
 
     return (

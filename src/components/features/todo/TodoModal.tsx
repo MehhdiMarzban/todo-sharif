@@ -6,9 +6,11 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogDescription,
 } from "@/components/ui/dialog";
 import {
     Drawer,
+    DrawerClose,
     DrawerContent,
     DrawerDescription,
     DrawerHeader,
@@ -16,33 +18,39 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { PlusCircleIcon } from "lucide-react";
+import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
-import TodoForm from "./TodoForm";
-import { DialogDescription } from "@radix-ui/react-dialog";
 
-const TriggerButton = (
-    <Button className="max-w-sm">
-        <PlusCircleIcon />
-        <span className="hidden md:flex">افزودن تسک</span>
-    </Button>
-);
-
-export default () => {
+interface TodoModalProps {
+    title: string;
+    withCancelButton: boolean;
+    FormRender: React.FC<{ onClose: () => void }>;
+    TriggerButton: React.JSX.Element;
+}
+const TodoModal: React.FC<React.PropsWithChildren<TodoModalProps>> = ({
+    title = "",
+    FormRender,
+    TriggerButton,
+    withCancelButton,
+}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const [open, setOpen] = useState(false);
-
-    const handleAddTodo = async (task: { id: string; title: string; completed: boolean }) => {};
 
     return isDesktop ? (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>{TriggerButton}</DialogTrigger>
             <DialogContent className="max-w-md">
                 <DialogHeader>
-                    <DialogTitle>اضافه کردن تسک جدید</DialogTitle>
+                    <DialogTitle>{title}</DialogTitle>
                 </DialogHeader>
-                <TodoForm onClose={() => setOpen(false)} />
-
+                <FormRender onClose={() => setOpen(false)} />
+                {withCancelButton && (
+                    <DialogClose asChild>
+                        <Button className="max-w-sm w-full mx-auto" variant={"secondary"}>
+                            لغو
+                        </Button>
+                    </DialogClose>
+                )}
                 {/* //* to prevent aria-accessability warning error */}
                 <DialogDescription></DialogDescription>
             </DialogContent>
@@ -52,10 +60,17 @@ export default () => {
             <DrawerTrigger asChild>{TriggerButton}</DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle>اضافه کردن تسک جدید</DrawerTitle>
+                    <DrawerTitle>{title}</DrawerTitle>
                 </DrawerHeader>
-                <div className="p-4">
-                    <TodoForm onClose={() => setOpen(false)} />
+                <div className="p-4 space-y-2">
+                    <FormRender onClose={() => setOpen(false)} />
+                    {withCancelButton && (
+                        <DrawerClose asChild>
+                            <Button className="max-w-sm w-full mx-auto" variant={"secondary"}>
+                                لغو
+                            </Button>
+                        </DrawerClose>
+                    )}
                 </div>
 
                 {/* //* to prevent aria-accessability warning error */}
@@ -64,3 +79,5 @@ export default () => {
         </Drawer>
     );
 };
+
+export default TodoModal;

@@ -1,9 +1,9 @@
 "use client";
 
+import TodoAdd from "./TodoAdd";
 import TodoCount from "./TodoCount";
 import TodoFilter, { TodoResetFilter } from "./TodoFilter";
 import TodoList from "./TodoList";
-import TodoModal from "./TodoModal";
 
 const Todo: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ const Todo: React.FC = () => {
                     <TodoFilter />
                     <TodoResetFilter />
                 </div>
-                <TodoModal />
+                <TodoAdd />
                 <TodoCount />
             </div>
             <TodoList />

@@ -1,8 +1,10 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn, fromNow } from "@/lib/utils";
 import { Todo } from "@/types";
 import { todoStateValues } from "@/types/Todo";
+import TodoDelete from "./TodoDelete";
 
 interface TodoItemProps {
     todo: Todo;
@@ -30,6 +32,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
                 </label>
                 <div className="flex items-end justify-between gap-2">
                     <p className="flex-1 text-xs md:text-sm mt-1 md:mt-2 text-muted-foreground">{fromNow(date)}</p>
+                    <Badge className="w-20" variant={"outline"}>{state}</Badge>
+                    <TodoDelete todo={todo} />
                     {/* <TodoEdit todo={todo} />
                     <TodoRemove todo={todo} /> */}
                 </div>

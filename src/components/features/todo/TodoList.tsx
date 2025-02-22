@@ -10,9 +10,10 @@ import TodoItem from './TodoItem';
 const TodoList: React.FC = () => {
     const [filter] = useQueryState("filter");
     const { currentUser } = useAppStore();
+    
     const todos = currentUser?.todos || [];
-    if(!todos) return null;
 
+    //* filter todos by selected filter
     const filteredTodos = todos?.filter((todo) => {
         switch (filter) {
             case todoStateValues[0]: //* check is done
