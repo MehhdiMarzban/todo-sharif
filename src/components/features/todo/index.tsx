@@ -1,38 +1,39 @@
 "use client";
 
-import useAppStore from "@/stores/AppState";
+import useIsUserLoaded from "@/hooks/useIsUserLoaded";
 import TodoAdd from "./TodoAdd";
 import TodoCount from "./TodoCount";
 import TodoFilter, { TodoResetFilter } from "./TodoFilter";
 import TodoList from "./TodoList";
 import Intro from "../intro";
+import { LoadingIcon } from "@/components/common";
 
 /**
- * The `Todo` component is the main component for managing the todo list feature.
- * It conditionally renders the `Intro` component if there is no current user.
- * If a user is present, it displays the todo list management interface.
+ * The `Todo` component is the main component for the todo feature.
+ * It handles the loading state, user authentication, and renders
+ * the todo list along with its associated features such as adding,
+ * filtering, and counting todos.
  *
  * @component
  * @returns {JSX.Element} The rendered component.
  *
- *
  * @remarks
- * This component uses the `useAppStore` hook to access the current user state.
- * It includes the following sub-components:
- * - `TodoFilter`: For filtering the todo list.
- * - `TodoResetFilter`: For resetting the todo list filters.
- * - `TodoAdd`: For adding new todos.
- * - `TodoCount`: For displaying the count of todos.
- * - `TodoList`: For displaying the list of todos.
- * - `Intro`: For displaying an introduction when no user is logged in.
+ * This component uses the `useIsUserLoaded` hook to check if the user
+ * is loaded and authenticated. If the user is not loaded, it displays
+ * a loading icon. If the user is not authenticated, it displays the
+ * `Intro` component. Once the user is authenticated, it displays the
+ * todo list and its associated features.
  */
 const Todo: React.FC = () => {
-    const { currentUser } = useAppStore();
+    const { currentUser, loading } = useIsUserLoaded();
 
-    if (!currentUser) {
+    if (loading) {
+        return <LoadingIcon className="flex justify-center w-full fill-primary" />;
+    }
+    if (!loading && !currentUser) {
         return <Intro />;
     }
-    
+
     return (
         <div className="flex flex-col items-start max-w-2xl w-full mx-auto">
             <div className="flex flex-row justify-around items-center w-full">
