@@ -7,6 +7,19 @@ import { todoStateValues } from "@/types/Todo";
 import TodoEmpty from "./TodoEmpty";
 import TodoItem from './TodoItem';
 
+/**
+ * TodoList component that displays a list of todos based on the current filter.
+ * 
+ * This component uses the `useQueryState` hook to get the current filter state and 
+ * the `useAppStore` hook to get the current user's todos. It filters the todos based 
+ * on the selected filter and displays them using the `AnimatePresence` and `motion` 
+ * components from the `motion/react` library for animations.
+ * 
+ * If there are no todos, it displays the `TodoEmpty` component.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
 const TodoList: React.FC = () => {
     const [filter] = useQueryState("filter");
     const { currentUser } = useAppStore();
