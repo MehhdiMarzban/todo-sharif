@@ -30,7 +30,7 @@ const TodoCount: React.FC<TodoCountProps> = ({ isDashboard = false }) => {
                 aria-hidden
                 willChange
                 format={{ useGrouping: false }}
-                value={isDashboard ? todos.length : currentUser?.todos.length || 0}
+                value={isDashboard ? todos.length : (currentUser?.todos?.length || 0)}
             />
         </h2>
     );

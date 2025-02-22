@@ -51,9 +51,9 @@ const DashboardUsersPage: React.FC = () => {
                                     </div>
                                 </div>
                                 <Badge
-                                    variant={getBadgeVariant(user.todos.length)}
+                                    variant={getBadgeVariant(user.todos?.length || 0)}
                                     className="text-sm px-4 py-2 rounded-xl shadow-sm">
-                                    {toPersianDigits(user.todos.length)}
+                                    {toPersianDigits(user.todos?.length || 0)}
                                     <span className="mr-2">تسک</span>
                                 </Badge>
                             </CardTitle>
