@@ -12,7 +12,7 @@ import { siteConfig } from "@/config/site";
  * @param {boolean} redirect - If true, the user is redirected to the specified path.
  * @param {string} redirectPath - The path to redirect to. Defaults to "/".
  * @param {boolean} haveAdminAccess - Just admin can access to this page.
- * 
+ *
  * @returns {{currentUser: User | null, loading: boolean}}
  */
 const useAuthGuard = (redirect = false, redirectPath = "/", haveAdminAccess = false) => {
@@ -29,6 +29,8 @@ const useAuthGuard = (redirect = false, redirectPath = "/", haveAdminAccess = fa
                     router.replace(redirectPath);
                 }
             }
+        } else if (haveAdminAccess) {
+            router.replace(redirectPath);
         }
     }, [currentUser, router, redirectPath]);
 

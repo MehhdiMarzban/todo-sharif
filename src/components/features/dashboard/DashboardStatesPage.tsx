@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { LoadingIcon } from "@/components/common";
 
 //* lazy loading the dashboard tasks chart
-const DashBoardTasksChart = dynamic(() => import("./DashBoardTasksChart"), {
+const DashboardTasksChart = dynamic(() => import("./DashboardTasksChart"), {
     ssr: false,
     loading: () => <div className="flex justify-center mx-auto w-full items-center"><LoadingIcon className="fill-primary" /></div>,
 });
@@ -44,7 +44,7 @@ const DashboardStates: React.FC = () => {
                 Icon={Check}
             />
             <DashboardCard title="تعداد کاربر ها" count={users.length} Icon={User} />
-            <DashBoardTasksChart todos={todos} />
+            <DashboardTasksChart todos={todos} />
         </div>
     );
 };

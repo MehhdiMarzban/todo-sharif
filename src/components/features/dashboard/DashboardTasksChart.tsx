@@ -43,9 +43,9 @@ interface DashBoardTasksChartProps {
  *   { id: 3, state: 'تکمیل شده', title: 'Task 3' },
  * ];
  * 
- * <DashBoardTasksChart todos={todos} />
+ * <DashboardTasksChart todos={todos} />
  */
-const DashBoardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => {
+const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => {
     // process data
     const countData = todoStateValues.map((state) => ({
         name: state,
@@ -143,4 +143,4 @@ const DashBoardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => 
     );
 }
 
-export default DashBoardTasksChart;
+export default DashboardTasksChart;

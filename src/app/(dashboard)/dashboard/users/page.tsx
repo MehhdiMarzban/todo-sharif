@@ -1,5 +1,5 @@
-import DashboardUsersPage from "@/components/features/dashboard/DashboardUsersPage";
 import { Metadata } from "next";
+import { DashboardUsersPage } from "@/components/features/dashboard";
 
 export const metadata : Metadata = {
     title: "کاربران",
