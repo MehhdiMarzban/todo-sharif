@@ -1,8 +1,25 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, ListChecks, Settings, Users } from "lucide-react";
-import Link from "next/link";
+import { LayoutDashboard, ListChecks, Users } from "lucide-react";
 
+/**
+ * A React functional component that renders a desktop menu for a dashboard.
+ * The menu includes a header and several navigation items.
+ *
+ * @component
+ * @param {React.ComponentProps<"div">} props - The props for the component.
+ * @param {string} [props.className] - Additional class names to apply to the root div.
+ * @param {React.HTMLAttributes<HTMLDivElement>} rest - Additional props to spread onto the root div.
+ *
+ * @returns {JSX.Element} The rendered desktop menu component.
+ *
+ * @example
+ * <DesktopMenu className="custom-class" />
+ *
+ * @remarks
+ * This component uses Tailwind CSS for styling and includes navigation links to different sections of the dashboard.
+ */
 const DesktopMenu: React.FC<React.ComponentProps<"div">> = ({ className, ...rest }) => {
     return (
         <div
