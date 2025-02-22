@@ -3,19 +3,17 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useAppStore from "@/stores/AppState";
-import { siteConfig } from "@/config/site";
 
 /**
- * This hook checks if the user is logged in and redirects to the specified path
- * if so. The hook returns an object with the `currentUser` and `loading` states.
+ * Hook to check if the user is logged in. If the user is logged in, then
+ * redirect to the specified path if the `redirect` option is true.
+ * Otherwise, returns the current user and loading state.
  *
- * @param {boolean} redirect - If true, the user is redirected to the specified path.
- * @param {string} redirectPath - The path to redirect to. Defaults to "/".
- * @param {boolean} haveAdminAccess - Just admin can access to this page.
- *
- * @returns {{currentUser: User | null, loading: boolean}}
+ * @param {boolean} redirect - If true, redirect to the specified path if the user is logged in. Defaults to false.
+ * @param {string} redirectPath - The path to redirect to if the user is logged in. Defaults to "/".
+ * @returns {{currentUser: User | null, loading: boolean}} - The current user and loading state.
  */
-const useAuthGuard = (redirect = false, redirectPath = "/", haveAdminAccess = false) => {
+const useAuthGuard = (redirect = false, redirectPath = "/") => {
     const router = useRouter();
     const { currentUser, loading, setLoading } = useAppStore();
 
@@ -23,14 +21,9 @@ const useAuthGuard = (redirect = false, redirectPath = "/", haveAdminAccess = fa
         setLoading(false);
         if (currentUser) {
             if (redirect) {
-                if (haveAdminAccess && currentUser.username === siteConfig.admin.username) {
-                } else {
-                    //* stop loading and redirect to "/"
-                    router.replace(redirectPath);
-                }
+                //* stop loading and redirect to "/"
+                router.replace(redirectPath);
             }
-        } else if (haveAdminAccess) {
-            router.replace(redirectPath);
         }
     }, [currentUser, router, redirectPath]);
 
