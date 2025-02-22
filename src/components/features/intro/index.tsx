@@ -19,6 +19,9 @@ const Intro: React.FC = () => {
                 یک اپلیکیشن مدیریت تسک سریع و کم حجم که با Next.js 15 و TailwindCss ساخته شده برای
                 سازماندهی بی‌دردسر تسک‌ها.
             </p>
+            <p className="mt-2 mx-auto max-w-2xl text-balance text-muted-foreground text-sm lg:text-lg underline underline-offset-8">
+                لطفا برای استفاده از اپلیکیشن ابتدا ورود یا ثبت نام کنید
+            </p>
             <Button asChild className="mt-4 rounded-full" variant={"outline"}>
                 <a
                     target="_blank"
