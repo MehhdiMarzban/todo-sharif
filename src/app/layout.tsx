@@ -22,13 +22,7 @@ export default function RootLayout({
     return (
         <html lang="fa" dir="rtl">
             <body className={`${AppFont.variable} font-sans antialiased`}>
-                <AppProviders>
-                    <div className="min-h-screen flex flex-col justify-between">
-                        <Header />
-                        <main className="container py-4">{children}</main>
-                        <Footer />
-                    </div>
-                </AppProviders>
+                <AppProviders>{children}</AppProviders>
             </body>
         </html>
     );
