@@ -5,6 +5,7 @@ import { immer } from "zustand/middleware/immer";
 import { Todo, User } from "@/types";
 import { toast } from "sonner";
 import { TodoFormType } from "@/validations/todo";
+import { AuthType } from "@/validations/auth";
 
 //* type definitions
 export type UserState = {
@@ -15,8 +16,8 @@ export type UserState = {
 };
 
 export type UserActions = {
-    signupUser: (user: User) => boolean;
-    signinUser: (user: User) => boolean;
+    signupUser: (user: AuthType) => boolean;
+    signinUser: (user: AuthType) => boolean;
     logoutUser: () => void;
     removeUser: (id: string) => void;
     setLoading: (loading: boolean) => void;
@@ -36,7 +37,7 @@ const useAppStore = create<AppStore>()(
             todos: [],
             currentUser: undefined,
             setLoading: (loading: boolean) => set({ loading }),
-            signupUser: (user: User) => {
+            signupUser: (user: AuthType) => {
                 let isSuccess = false;
                 set((state) => {
                     const isExist = state.users.find((u) => u.username === user.username);
@@ -55,7 +56,7 @@ const useAppStore = create<AppStore>()(
                 });
                 return isSuccess;
             },
-            signinUser: (user: User) => {
+            signinUser: (user: AuthType) => {
                 let isSuccess = false;
                 set((state) => {
                     const currentUser = state.users.find(
@@ -137,8 +138,8 @@ const useAppStore = create<AppStore>()(
                 }),
             deleteTodo: (todo) =>
                 set((state) => {
-                    state.todos = state.todos.filter((t) => t.id !== todo.id);
-                    if (state.currentUser && state.currentUser.todos) {
+                    if (state.currentUser) {
+                        state.todos = state.todos.filter((t) => t.id !== todo.id);
                         state.currentUser.todos = state.currentUser?.todos?.filter(
                             (t) => t.id !== todo.id
                         );
@@ -147,23 +148,24 @@ const useAppStore = create<AppStore>()(
                             (user) => user.id === todo.user.id
                         );
                         state.users[findUserIndex].todos = state.currentUser?.todos;
+                        toast.success("با موفقیت حذف شد !");
+                    } else {
+                        toast.error("لطفا وارد شوید !");
                     }
-
-                    toast.success("با موفقیت حذف شد !");
                 }),
             updateTodo: (todo) =>
                 set((state) => {
-                    //* update todos
-                    state.todos = state.todos.map((t) => {
-                        if (t.id === todo.id) {
-                            return todo;
-                        } else {
-                            return t;
-                        }
-                    });
+                    if (state.currentUser) {
+                        //* update todos
+                        state.todos = state.todos.map((t) => {
+                            if (t.id === todo.id) {
+                                return todo;
+                            } else {
+                                return t;
+                            }
+                        });
 
-                    //* update currentUser
-                    if (state.currentUser && state.currentUser.todos) {
+                        //* update currentUser
                         state.currentUser.todos = state.currentUser?.todos?.map((t) => {
                             if (t.id === todo.id) {
                                 return todo;
@@ -176,9 +178,10 @@ const useAppStore = create<AppStore>()(
                             (user) => user.id === todo.user.id
                         );
                         state.users[findUserIndex].todos = state.currentUser?.todos;
+                        toast.success("با موفقیت بروز شد !");
+                    } else {
+                        toast.error("لطفا وارد شوید !");
                     }
-                    toast.success("با موفقیت بروز شد !");
-
                 }),
         })),
         {
