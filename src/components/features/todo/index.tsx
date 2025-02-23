@@ -33,7 +33,6 @@ const Todo: React.FC = () => {
     if (!loading && !currentUser) {
         return <Intro />;
     }
-
     return (
         <div className="flex flex-col items-start max-w-2xl w-full mx-auto">
             <div className="flex flex-row justify-around items-center w-full">

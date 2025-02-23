@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTransition } from "react";
-import { LogOut } from "lucide-react";
+import { LayoutDashboard, LogOut } from "lucide-react";
 
 import { LoadingIcon } from "@/components/common";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import useAppStore from "@/stores/AppState";
 import useIsUserLoaded from "@/hooks/useIsUserLoaded";
 import { Skeleton } from "@/components/ui/skeleton";
+import { siteConfig } from "@/config/site";
 
 /**
  * A button that displays the current user's profile picture and username.
@@ -60,6 +61,18 @@ const UserProfile: React.FC = () => {
             <PopoverContent className="flex w-48 flex-col gap-2 p-2" align={"end"}>
                 <p className="font-semibold text-sm text-center">کاربر : {currentUser.username}</p>
                 <Separator className="bg-border/40" />
+                {currentUser.username === siteConfig.admin.username && (
+                    <Button
+                        size={"sm"}
+                        className="w-full focus-visible:ring-0"
+                        variant={"default"}
+                        asChild>
+                        <Link href="/dashboard">
+                            <LayoutDashboard />
+                            داشبورد
+                        </Link>
+                    </Button>
+                )}
                 <Button
                     size={"sm"}
                     className="w-full focus-visible:ring-0"
