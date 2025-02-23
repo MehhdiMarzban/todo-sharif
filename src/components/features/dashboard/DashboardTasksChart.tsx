@@ -42,10 +42,10 @@ interface DashBoardTasksChartProps {
  *   { id: 2, state: 'در حال انجام', title: 'Task 2' },
  *   { id: 3, state: 'تکمیل شده', title: 'Task 3' },
  * ];
- * 
+ *
  * <DashboardTasksChart todos={todos} />
  */
-const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => {
+const DashboardTasksChart: React.FC<DashBoardTasksChartProps> = ({ todos }) => {
     // process data
     const countData = todoStateValues.map((state) => ({
         name: state,
@@ -61,7 +61,10 @@ const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => 
 
             <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8 h-100 md:h-50 w-full">
                 <div className="h-50">
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer
+                        className="**:text-secondary-foreground"
+                        width="100%"
+                        height="100%">
                         <PieChart>
                             <Pie
                                 data={countData}
@@ -83,11 +86,11 @@ const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => 
                             </Pie>
                             <Tooltip
                                 contentStyle={{
-                                    background: "hsl(var(--background))",
-                                    borderColor: "hsl(var(--border))",
+                                    background: "var(--background)",
+                                    borderColor: "var(--border)",
                                     borderRadius: "var(--radius)",
                                 }}
-                                itemStyle={{ color: "hsl(var(--foreground))" }}
+                                itemStyle={{ color: "var(--foreground)" }}
                             />
                         </PieChart>
                     </ResponsiveContainer>
@@ -99,20 +102,31 @@ const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => 
                         <BarChart data={countData}>
                             <XAxis
                                 dataKey="name"
-                                stroke="hsl(var(--foreground))"
-                                tickLine={{ stroke: "hsl(var(--border))" }}
+                                stroke="var(--foreground)"
+                                tick={{
+                                    fill: "var(--foreground)", 
+                                    fontSize: 12,
+                                    fontFamily: "var(--font-sans)",
+                                }}
+                                tickLine={{ stroke: "var(--border)" }}
                             />
                             <YAxis
-                                stroke="hsl(var(--foreground))"
-                                tickLine={{ stroke: "hsl(var(--border))" }}
+                                stroke="var(--foreground)"
+                                tickLine={{ stroke: "var(--border)" }}
+                                tick={{
+                                    fill: "var(--foreground)",
+                                    fontSize: 12,
+                                    fontFamily: "var(--font-sans)",
+                                }}
                             />
                             <Tooltip
                                 contentStyle={{
-                                    background: "hsl(var(--background))",
-                                    borderColor: "hsl(var(--border))",
+                                    background: "var(--background)",
+                                    color: "var(--foreground)",
+                                    borderColor: "var(--border)",
                                     borderRadius: "var(--radius)",
                                 }}
-                                itemStyle={{ color: "hsl(var(--foreground))" }}
+                                itemStyle={{ color: "var(--foreground)" }}
                             />
                             <Bar dataKey="value" radius={[4, 4, 0, 0]} animationDuration={800}>
                                 {countData.map((entry, index) => (
@@ -141,6 +155,6 @@ const DashboardTasksChart : React.FC<DashBoardTasksChartProps> = ({ todos }) => 
             </div>
         </Card>
     );
-}
+};
 
 export default DashboardTasksChart;

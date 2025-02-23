@@ -29,6 +29,7 @@
     "lucide-react": "^0.475.0",
     "motion": "^12.4.7",
     "next": "15.1.7",
+    "next-themes": "^0.4.4",
     "number-persian": "^0.1.3",
     "nuqs": "^2.4.0",
     "react": "^19.0.0",

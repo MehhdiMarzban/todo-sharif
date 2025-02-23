@@ -26,7 +26,7 @@ const ToastProvider : React.FC = () => {
                     border: "1px solid hsl(var(--border))",
                 },
                 classNames: {
-                    toast: "shadow font-sans z-50 mb-6 select-none",
+                    toast: "shadow font-sans z-50 mb-6 select-none bg-background",
                     icon: "text-emerald-500",
                 },
             }}

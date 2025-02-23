@@ -20,7 +20,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fa" dir="rtl">
+        <html lang="fa" dir="rtl" suppressHydrationWarning>
             <body className={`${AppFont.variable} font-sans antialiased`}>
                 <AppProviders>{children}</AppProviders>
             </body>

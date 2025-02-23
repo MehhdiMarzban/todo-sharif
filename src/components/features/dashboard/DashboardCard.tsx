@@ -24,7 +24,7 @@ interface DashboardCardProps {
  */
 const DashboardCard: React.FC<DashboardCardProps> = ({ title, count, Icon }) => {
     return (
-        <Card className="relative overflow-hidden bg-background/80 transition-all backdrop-blur-md border border-gray-200/30 dark:border-gray-800/50 group animate-in zoom-in fade-in">
+        <Card className="relative overflow-hidden bg-background/80 transition-all ease backdrop-blur-md border border-gray-200/30 dark:border-gray-800/50 group animate-in zoom-in fade-in">
             <div className="p-6 group-hover:bg-secondary/45">
                 <div className="flex items-center gap-3 mb-4">
                     <div className="p-2 bg-primary/10 rounded-lg">
