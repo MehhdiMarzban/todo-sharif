@@ -34,7 +34,7 @@ const UserProfile: React.FC = () => {
 
     if (!currentUser) {
         return (
-            <Button asChild variant={"ghost"}>
+            <Button className="text-xs md:text-sm p-1 md:p-2" asChild variant={"ghost"}>
                 <Link href={"/auth"}>ورود / ثبت نام</Link>
             </Button>
         );

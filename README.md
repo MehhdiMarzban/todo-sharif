@@ -1,93 +1,173 @@
-# Todo Sharif
+---
+# Todo Sharif Documentation  
+**Live Application**: [https://todo-sharif.mehdi-marzban.ir](https://todo-sharif.mehdi-marzban.ir)  
 
-The online address for this application is [http://todo-sharif.mehdi-marzban.ir](http://todo-sharif.mehdi-marzban.ir).
+---
 
-## Introduction
+## Table of Contents  
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Key Features](#key-features)
+  - [Core Functionality](#core-functionality)
+  - [UI/UX Highlights](#uiux-highlights)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Setup Process](#setup-process)
+- [Project Structure](#project-structure)
+- [Usage Guide](#usage-guide)
+  - [Initial Setup](#initial-setup)
+  - [Key Interactions](#key-interactions)
+- [Technical Specifications](#technical-specifications)
+  - [Core Stack](#core-stack)
+  - [Key Dependencies](#key-dependencies)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
 
-To access the dashboard, you need to create a user with the default username and password.
+---
+
+## Introduction  
+
+A modern Persian-friendly task management system built with Next.js 15 featuring:  
+✅ **Full responsiveness** across all devices  
+🎨 **Dynamic theme system** with automatic dark/light mode  
+🗓️ **Jalali date support** using date-fns-jalali  
+🔐 **Instant access** with default credentials  
+
+**Dashboard Access Requirement**:  
+
+1. Register using:  
+   - Username: `default`  
+   - Password: `default`  
+2. Navigate to Profile section to unlock Dashboard  
+
+*Normal Users Can't Access To Dashboard*
+
+---
+
+## Key Features  
+
+### Core Functionality
+
+- ✅ Component documentation with hover-to-view JSDoc support
+- ✨ Complete Persian calendar integration  
+- 📱 Mobile-optimized responsive UI  
+- 🗂️ Atomic design structure with feature-based components  
+- 🎭 Smooth animations using Framer Motion  
+- 📊 Interactive charts with Recharts  
+
+### UI/UX Highlights
+
+- Modern drawer system with Vaul  
+- Toast notifications with Sonner  
+- Accessible Shadcn/ui components  
+- Theme-aware color scheme with next-themes  
+- Type-safe form validation with Zod and Typescript
+  
+---
 
 ## Installation
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/your-repo/todo-sharif.git
-    ```
-2. Navigate to the project directory:
-    ```sh
-    cd todo-sharif
-    ```
-3. Install dependencies:
-    ```sh
-    npm install
-    ```
-4. Build app:
-    ```sh
-    npm run build
-    ```
-5. Start the application:
-    ```sh
-    npm start
-    ```
+### Requirements
 
-## Features
+- Node.js v20+  
+- npm v9+  
 
--   Fully responsive design
--   Utilizes semantic tags
--   Follows semantic commit messages
--   Uses Semantic UI for styling
+### Setup Process
 
-## Packages Used
+```bash
+# 1. Clone repository
+git clone https://github.com/your-repo/todo-sharif.git
 
--   Next
--   React
--   TailwindCss
--   Zustand
--   Motion
+# 2. Install dependencies
+npm install
+
+# 3. Start development server
+npm run dev
+```
+
+Access application at: `http://localhost:3000`
+
+---
 
 ## Project Structure
 
-```
+```bash
 todo-sharif/
-├── public/
+├── public/            # Static assets
 ├── src/
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── header/
-│   │   │   ├── Footer.tsx
-│   │   │   ├── AdminLayout.tsx
-│   │   │   ├── ThemeToggler.tsx
-│   │   │   ├── Icons.tsx
-│   │   ├── features/
-│   │   │   ├── auth/
-│   │   │   ├── todo/
-│   │   │   ├── intro/
-│   │   │   ├── dashboard/
-│   │   ├── providers/
-│   ├── configs/
-│   ├── constants/
-│   ├── lib/
-│   ├── types/
-│   ├── validations/
-│   ├── stores/
-│   ├── app/
-│   ├── hooks/
-│   └── styles/
+│   ├── app/           # Next.js app router
+│   ├── components/    
+│   │   ├── features/  # Auth, Todos, Dashboard
+│   │   ├── providers/ # Theme/State providers
+│   │   ├── ui/        # Shadcn/ui components
+│   ├── lib/           # Utility functions
+│   ├── stores/        # Zustand state management
+│   ├── validations/   # Zod validation schemas
+│   ├── hooks/         # Custom React hooks  
+│   ├── constants/     # App static Data  
+│   ├── styles/        # Global CSS/SCSS
+│   ├── types/         # Type definitions
+│   ├── config/        # Site Config (ex: site title, description, etc.)
 └── package.json
 ```
 
-## Usage
+---
 
-1. Open your browser and go to [http://localhost:3000](http://localhost:3000).
-2. Log in with the default username and password.
-3. Navigate through the dashboard to manage your tasks.
+## Usage Guide
 
-## Code Structure
+### Initial Setup
 
--   **Components**: Contains UI components.
--   **Pages**: Contains different pages of the application.
--   **Stores**: Manages the application state.
--   **Styles**: Contains CSS and styling files.
+1. Visit auth page and register or login
+2. Use credentials:  
+   - Username: `your username`  
+   - Password: `your password`  
 
-## Conclusion
+### Key Interactions
 
-This project is designed with a focus on responsiveness and semantic code practices, ensuring a smooth user experience and maintainable codebase.
+1. **Dashboard Access (Admin)**:  
+   - Complete registration  
+   - Navigate to Profile  
+   - Click Dashboard button  
+
+2. **Task Management (User)**:  
+   - Add tasks with action button  
+   - Mark tasks as done
+   - Mark tasks as doing
+   - Mark tasks as waiting
+   - Delete tasks
+---
+
+## Technical Specifications
+
+### Core Stack
+
+| Technology | Purpose |  
+|------------|---------|  
+| Next.js 15 | App Router & SSR |  
+| Typescript | Type-safe development |  
+| Tailwind CSS | Utility-first styling |  
+| Zustand | State management |  
+| Shadcn/ui | Accessible components |  
+
+### Key Dependencies
+
+- Date Management: `date-fns-jalali`  
+- Forms: `react-hook-form + Zod`  
+- Animation: `Framer Motion`  
+- UI: `Radix UI Primitives`  
+- Notifications: `Sonner`  
+
+---
+
+## Troubleshooting
+
+| Issue | Resolution |  
+|-------|------------|  
+| Registration Failure | Clear localStorage & refresh |  
+| Missing Dashboard | Complete registration first |  
+
+---
+
+## License  
+
+MIT License - See [LICENSE](LICENSE) for details  
