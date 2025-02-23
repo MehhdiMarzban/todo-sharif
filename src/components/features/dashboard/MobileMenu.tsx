@@ -1,4 +1,7 @@
+"use client";
+
 import { Menu } from "lucide-react";
+import { useState } from "react";
 import { Drawer, DrawerContent, DrawerDescription, DrawerTrigger } from "@/components/ui/drawer";
 import DesktopMenu from "./DesktopMenu";
 import { Button } from "@/components/ui/button";
@@ -26,8 +29,10 @@ import { cn } from "@/lib/utils";
  * @returns {JSX.Element} The rendered mobile menu component.
  */
 const MobileMenu: React.FC<React.ComponentProps<"div">> = ({ className }) => {
+    const [open, setOpen] = useState(false);
+
     return (
-        <Drawer direction="right">
+        <Drawer direction="right" open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild className={cn("mt-2 mx-2 z-50", className)}>
                 <Button variant="ghost" size="icon">
                     <Menu className="h-5 w-5" />
@@ -38,7 +43,10 @@ const MobileMenu: React.FC<React.ComponentProps<"div">> = ({ className }) => {
                 {/* //* to prevent warnings */}
                 <DialogTitle></DialogTitle>
                 <DrawerDescription></DrawerDescription>
-                <DesktopMenu className="w-full h-full border-none shadow-none" />
+                <DesktopMenu
+                    className="w-full h-full border-none shadow-none"
+                    onClose={() => setOpen(false)}
+                />
             </DrawerContent>
         </Drawer>
     );

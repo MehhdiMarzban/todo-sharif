@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LayoutDashboard, ListChecks, Users } from "lucide-react";
+import DashboardMenuLink from "./DashboardMenuLink";
 
 /**
  * A React functional component that renders a desktop menu for a dashboard.
@@ -20,7 +21,11 @@ import { LayoutDashboard, ListChecks, Users } from "lucide-react";
  * @remarks
  * This component uses Tailwind CSS for styling and includes navigation links to different sections of the dashboard.
  */
-const DesktopMenu: React.FC<React.ComponentProps<"div">> = ({ className, ...rest }) => {
+const DesktopMenu: React.FC<React.ComponentProps<"div"> & { onClose?: () => void }> = ({
+    className,
+    onClose,
+    ...rest
+}) => {
     return (
         <div
             className={cn(
@@ -42,32 +47,20 @@ const DesktopMenu: React.FC<React.ComponentProps<"div">> = ({ className, ...rest
 
             {/* Menu Items */}
             <nav className="space-y-4">
-                <Link href="/dashboard">
-                    <Button
-                        variant="ghost"
-                        className="w-full justify-start gap-3 px-4 py-6 hover:bg-accent/50 transition-all">
-                        <LayoutDashboard className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">وضعیت‌ها</span>
-                    </Button>
-                </Link>
+                <DashboardMenuLink path="/dashboard" onClose={onClose}>
+                    <LayoutDashboard className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">وضعیت‌ها</span>
+                </DashboardMenuLink>
 
-                <Link href="/dashboard/tasks">
-                    <Button
-                        variant="ghost"
-                        className="w-full justify-start gap-3 px-4 py-6 hover:bg-accent/50 transition-all">
-                        <ListChecks className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">تسک‌ها</span>
-                    </Button>
-                </Link>
+                <DashboardMenuLink path="/dashboard/tasks" onClose={onClose}>
+                    <ListChecks className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">تسک‌ها</span>
+                </DashboardMenuLink>
 
-                <Link href="/dashboard/users">
-                    <Button
-                        variant="ghost"
-                        className="w-full justify-start gap-3 px-4 py-6 hover:bg-accent/50 transition-all">
-                        <Users className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">کاربران</span>
-                    </Button>
-                </Link>
+                <DashboardMenuLink path="/dashboard/users" onClose={onClose}>
+                    <Users className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium">کاربران</span>
+                </DashboardMenuLink>
             </nav>
         </div>
     );
