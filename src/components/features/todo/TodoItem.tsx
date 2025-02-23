@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 interface TodoItemProps {
     todo: Todo;
+    isDashboard?: boolean;
 }
 
 /**
@@ -32,7 +33,7 @@ interface TodoItemProps {
  *
  * <TodoItem todo={todo} />
  */
-const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo, isDashboard = false }) => {
     const { id, state, title, date } = todo;
     const { updateTodo } = useAppStore();
     const handleUpdateTodo = () => {
@@ -80,7 +81,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
                         {" توسط "}
                         <TooltipProvider>
                             <Tooltip>
-                                <TooltipTrigger>شما</TooltipTrigger>
+                                <TooltipTrigger>
+                                    {isDashboard ? todo.user.username : "شما"}
+                                </TooltipTrigger>
                                 <TooltipContent>
                                     <p>اضافه شده توسط کاربر {todo.user.username}</p>
                                 </TooltipContent>

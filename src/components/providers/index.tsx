@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeProvider } from "next-themes";
 import NuqsProvider from "./Nuqs-Provider";
 import ToastProvider from "./Toast-Provider";
 /**
@@ -13,10 +14,12 @@ import ToastProvider from "./Toast-Provider";
 const AppProviders: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
         <>
-            <NuqsProvider>
-                <ToastProvider />
-                {children}
-            </NuqsProvider>
+            <ThemeProvider attribute="class" defaultTheme="light">
+                <NuqsProvider>
+                    <ToastProvider />
+                    {children}
+                </NuqsProvider>
+            </ThemeProvider>
         </>
     );
 };

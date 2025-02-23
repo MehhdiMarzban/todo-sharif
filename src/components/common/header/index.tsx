@@ -1,3 +1,4 @@
+import { ThemeToggler } from "..";
 import { Logo } from "./Logo";
 import UserProfile from "./UserProfile";
 
@@ -15,7 +16,7 @@ const Header: React.FC = () => {
             <nav className="container flex items-center justify-between gap-4 px-4 py-2">
                 <Logo />
                 <div className="flex items-center gap-4">
-                    {/* <TodoModal /> */}
+                    <ThemeToggler />
                     <UserProfile />
                 </div>
             </nav>

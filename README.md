@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo Sharif
 
-## Getting Started
+The online address for this application is [http://todo-sharif.mehdi-marzban.ir](http://todo-sharif.mehdi-marzban.ir).
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+To access the dashboard, you need to create a user with the default username and password.
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/your-repo/todo-sharif.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd todo-sharif
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+4. Build app:
+    ```sh
+    npm run build
+    ```
+5. Start the application:
+    ```sh
+    npm start
+    ```
+
+## Features
+
+-   Fully responsive design
+-   Utilizes semantic tags
+-   Follows semantic commit messages
+-   Uses Semantic UI for styling
+
+## Packages Used
+
+-   Next
+-   React
+-   TailwindCss
+-   Zustand
+-   Motion
+
+## Project Structure
+
+```
+todo-sharif/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── header/
+│   │   │   ├── Footer.tsx
+│   │   │   ├── AdminLayout.tsx
+│   │   │   ├── ThemeToggler.tsx
+│   │   │   ├── Icons.tsx
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   ├── todo/
+│   │   │   ├── intro/
+│   │   │   ├── dashboard/
+│   │   ├── providers/
+│   ├── configs/
+│   ├── constants/
+│   ├── lib/
+│   ├── types/
+│   ├── validations/
+│   ├── stores/
+│   ├── app/
+│   ├── hooks/
+│   └── styles/
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Open your browser and go to [http://localhost:3000](http://localhost:3000).
+2. Log in with the default username and password.
+3. Navigate through the dashboard to manage your tasks.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Code Structure
 
-## Learn More
+-   **Components**: Contains UI components.
+-   **Pages**: Contains different pages of the application.
+-   **Stores**: Manages the application state.
+-   **Styles**: Contains CSS and styling files.
 
-To learn more about Next.js, take a look at the following resources:
+## Conclusion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is designed with a focus on responsiveness and semantic code practices, ensuring a smooth user experience and maintainable codebase.
