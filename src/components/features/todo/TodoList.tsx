@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import { useMemo } from "react";
 import { useQueryState } from "nuqs";
 import useAppStore from "@/stores/AppState";
 import Todo, { todoStateValues } from "@/types/Todo";
@@ -42,19 +43,23 @@ const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) =>
         todos = currentUser?.todos || [];
     }
 
-    //* filter todos by selected filter
-    const filteredTodos = todos?.filter((todo) => {
-        switch (filter) {
-            case todoStateValues[0]: //* check is done
-                return todo.state === todoStateValues[0];
-            case todoStateValues[1]: //* check is doing
-                return todo.state === todoStateValues[1];
-            case todoStateValues[2]: //* check is waiting
-                return todo.state === todoStateValues[2];
-            default:
-                return true;
-        }
-    });
+    //* filter todos by selected filter and memorized
+    const filteredTodos = useMemo(
+        () =>
+            todos?.filter((todo) => {
+                switch (filter) {
+                    case todoStateValues[0]: //* check is done
+                        return todo.state === todoStateValues[0];
+                    case todoStateValues[1]: //* check is doing
+                        return todo.state === todoStateValues[1];
+                    case todoStateValues[2]: //* check is waiting
+                        return todo.state === todoStateValues[2];
+                    default:
+                        return true;
+                }
+            }),
+        [filter, currentUser]
+    );
 
     return (
         <div className="flex flex-col w-full my-4 gap-2">
@@ -65,7 +70,7 @@ const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) =>
                     {filteredTodos?.map((todo) => (
                         <motion.div
                             key={todo.id}
-                            layout
+                            layout="position"
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
