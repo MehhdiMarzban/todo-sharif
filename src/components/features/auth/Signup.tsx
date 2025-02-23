@@ -94,6 +94,7 @@ const Signup: React.FC = () => {
                                     <FormControl>
                                         <Input
                                             dir="ltr"
+                                            type="password"
                                             className="text-center"
                                             placeholder="رمزعبور"
                                             {...field}
