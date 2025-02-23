@@ -1,27 +1,28 @@
----
-# Todo Sharif Documentation  
+# Todo Sharif Documentation
+
 **Live Application**: [https://todo-sharif.mehdi-marzban.ir](https://todo-sharif.mehdi-marzban.ir)  
 
 ---
 
 ## Table of Contents  
-- [Table of Contents](#table-of-contents)
-- [Introduction](#introduction)
-- [Key Features](#key-features)
-  - [Core Functionality](#core-functionality)
-  - [UI/UX Highlights](#uiux-highlights)
-- [Installation](#installation)
-  - [Requirements](#requirements)
-  - [Setup Process](#setup-process)
-- [Project Structure](#project-structure)
-- [Usage Guide](#usage-guide)
-  - [Initial Setup](#initial-setup)
-  - [Key Interactions](#key-interactions)
-- [Technical Specifications](#technical-specifications)
-  - [Core Stack](#core-stack)
-  - [Key Dependencies](#key-dependencies)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
+- [Todo Sharif Documentation](#todo-sharif-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Key Features](#key-features)
+    - [Core Functionality](#core-functionality)
+    - [UI/UX Highlights](#uiux-highlights)
+  - [Installation](#installation)
+    - [Requirements](#requirements)
+    - [Setup Process](#setup-process)
+  - [Project Structure](#project-structure)
+  - [Usage Guide](#usage-guide)
+    - [Initial Setup](#initial-setup)
+    - [Key Interactions](#key-interactions)
+  - [Technical Specifications](#technical-specifications)
+    - [Core Stack](#core-stack)
+    - [Key Dependencies](#key-dependencies)
+  - [Troubleshooting](#troubleshooting)
+  - [License](#license)
 
 ---
 
