@@ -106,7 +106,7 @@ todo-sharif/
 │   ├── validations/   # Zod validation schemas
 │   ├── hooks/         # Custom React hooks  
 │   ├── constants/     # App static Data  
-│   ├── styles/        # Global CSS/SCSS
+│   ├── styles/        # Global CSS
 │   ├── types/         # Type definitions
 │   ├── config/        # Site Config (ex: site title, description, etc.)
 └── package.json
