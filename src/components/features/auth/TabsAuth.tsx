@@ -1,7 +1,8 @@
+import { TabsContent } from "@radix-ui/react-tabs";
+
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
 
 interface TabsAuthProps {
     SigninComponent: React.FC;
@@ -43,9 +44,19 @@ const TabsAuth: React.FC<TabsAuthProps> = ({ SigninComponent, SignupComponent })
 
 export default TabsAuth;
 
+/**
+ * TabsAuthSkeleton is a React functional component that renders a skeleton
+ * placeholder for the TabsAuth component during loading states.
+ *
+ * The component includes two tabs, "signin" and "signup", each represented
+ * by a skeleton loader. It also contains a card with additional skeleton
+ * loaders to mimic form fields and headings.
+ *
+ * @returns {React.ReactElement} The rendered skeleton component.
+ */
 export const TabsAuthSkeleton: React.FC = () => {
     return (
-        <Tabs dir="rtl" className="max-w-lg mx-auto" defaultValue="signin">
+        <Tabs dir="rtl" className="max-w-lg w-full mx-auto" defaultValue="signin">
             <TabsList className="grid w-full grid-cols-2 h-11 rounded-b-none">
                 <TabsTrigger value="signin">
                     <Skeleton className="h-5 w-full" />
