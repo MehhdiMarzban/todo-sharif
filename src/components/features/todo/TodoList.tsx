@@ -33,14 +33,14 @@ interface TodoListProps {
  */
 const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) => {
     const [filter] = useQueryState("filter");
-    const currentUserTodos = useAppStore((state) => state.currentUser?.todos || []);
+    const currentUserTodos = useAppStore((state) => state.currentUser?.todos);
 
     //* checking todos;
     let todos: Todo[] = [];
     if (allTodos) {
         todos = allTodos;
     } else {
-        todos = currentUserTodos;
+        todos = currentUserTodos || [];
     }
     //* filter todos by selected filter and memorized
     const filteredTodos = useMemo(
