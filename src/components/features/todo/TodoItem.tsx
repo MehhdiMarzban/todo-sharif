@@ -7,6 +7,7 @@ import { todoStateValues } from "@/types/Todo";
 import TodoDelete from "./TodoDelete";
 import useAppStore from "@/stores/AppState";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { memo } from "react";
 
 interface TodoItemProps {
     todo: Todo;
@@ -100,4 +101,4 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, isDashboard = false }) => {
     );
 };
 
-export default TodoItem;
+export default memo(TodoItem);

@@ -33,16 +33,15 @@ interface TodoListProps {
  */
 const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) => {
     const [filter] = useQueryState("filter");
-    const { currentUser } = useAppStore();
+    const currentUserTodos = useAppStore((state) => state.currentUser?.todos || []);
 
     //* checking todos;
     let todos: Todo[] = [];
     if (allTodos) {
         todos = allTodos;
     } else {
-        todos = currentUser?.todos || [];
+        todos = currentUserTodos;
     }
-
     //* filter todos by selected filter and memorized
     const filteredTodos = useMemo(
         () =>
@@ -58,7 +57,7 @@ const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) =>
                         return true;
                 }
             }),
-        [filter, currentUser]
+        [filter, todos]
     );
 
     return (
@@ -70,7 +69,7 @@ const TodoList: React.FC<TodoListProps> = ({ allTodos, isDashboard = false }) =>
                     {filteredTodos?.map((todo) => (
                         <motion.div
                             key={todo.id}
-                            layout="position"
+                            layout
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
