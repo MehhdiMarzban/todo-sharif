@@ -1,4 +1,6 @@
 "use client";
+
+import { memo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn, fromNow } from "@/lib/utils";
@@ -7,7 +9,6 @@ import { todoStateValues } from "@/types/Todo";
 import TodoDelete from "./TodoDelete";
 import useAppStore from "@/stores/AppState";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { memo } from "react";
 
 interface TodoItemProps {
     todo: Todo;
