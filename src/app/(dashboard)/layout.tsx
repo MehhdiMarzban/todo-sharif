@@ -1,5 +1,6 @@
-import { AdminLayout, Footer, Header } from "@/components/common";
+import { Footer, Header } from "@/components/common";
 import Menubar from "@/components/features/dashboard/MenuBar";
+import { AdminLayout } from "@/components/layouts";
 
 const DashboardLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (

@@ -1,4 +1,6 @@
 "use client";
+
+import { memo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn, fromNow } from "@/lib/utils";
@@ -58,8 +60,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, isDashboard = false }) => {
     return (
         <div
             className={cn("rounded-md border bg-card p-2 transition-all", {
-                "bg-primary/5": state === todoStateValues[2], //* for done todo
-                "bg-chart-4/20": state === todoStateValues[1], //* for doing todo
+                "bg-primary/10 dark:bg-emerald-500/10": state === todoStateValues[2], //* for done todo
+                "bg-chart-4/20 dark:bg-amber-300/10": state === todoStateValues[1], //* for doing todo
             })}>
             <div className="flex flex-col">
                 <label
@@ -100,4 +102,4 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, isDashboard = false }) => {
     );
 };
 
-export default TodoItem;
+export default memo(TodoItem);

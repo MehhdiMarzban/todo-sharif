@@ -1,12 +1,23 @@
 "use client";
 
-import useIsUserLoaded from "@/hooks/useIsUserLoaded";
+import dynamic from "next/dynamic";
 import TodoAdd from "./TodoAdd";
 import TodoCount from "./TodoCount";
 import TodoFilter, { TodoResetFilter } from "./TodoFilter";
-import TodoList from "./TodoList";
-import Intro from "../intro";
+import { withUser } from "@/components/hocs";
+import { User } from "@/types";
 import { LoadingIcon } from "@/components/common";
+
+//* dynamic import to reduce size of first load js
+const TodoList = dynamic(() => import("./TodoList"), {
+    ssr: false,
+    loading: () => <LoadingIcon className="fill-primary mx-auto mt-4" />,
+});
+
+const Intro = dynamic(() => import("../intro"), {
+    ssr: true,
+    loading: () => <LoadingIcon className="fill-primary mx-auto" />,
+});
 
 /**
  * The `Todo` component is the main component for the todo feature.
@@ -24,13 +35,8 @@ import { LoadingIcon } from "@/components/common";
  * `Intro` component. Once the user is authenticated, it displays the
  * todo list and its associated features.
  */
-const Todo: React.FC = () => {
-    const { currentUser, loading } = useIsUserLoaded();
-
-    if (loading) {
-        return <LoadingIcon className="flex justify-center w-full fill-primary" />;
-    }
-    if (!loading && !currentUser) {
+const Todo: React.FC<{ user: User | undefined }> = ({ user }) => {
+    if (!user) {
         return <Intro />;
     }
     return (
@@ -49,4 +55,4 @@ const Todo: React.FC = () => {
     );
 };
 
-export default Todo;
+export default withUser(Todo);
