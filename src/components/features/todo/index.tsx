@@ -26,6 +26,9 @@ const Intro = dynamic(() => import("../intro"), {
  * filtering, and counting todos.
  *
  * @component
+ * @props this component get all props with a high order component named withUser and doesn't need to send the props, it's all automatic
+ * @param {user} User - the current user account
+ * @param {loading} boolean - show state loading 
  * @returns {JSX.Element} The rendered component.
  *
  * @remarks
