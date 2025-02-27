@@ -27,3 +27,8 @@ export default function RootLayout({
         </html>
     );
 }
+ {/* to check speed and performance */}
+//  <head>
+//  <script crossOrigin="anonymous" src="//unpkg.com/react-scan/dist/auto.global.js" />
+//  {/* rest of your scripts go under */}
+// </head>
