@@ -8,20 +8,27 @@ const ErrorPage: React.FC<{ error: Error & { digest?: string }; reset: () => voi
     reset,
 }) => {
     return (
-        <Card className="text-center max-w-lg w-full mx-auto">
-            <CardHeader>
-                <h1 className="text-base sm:text-lg md:text-xl font-bold">متاسفانه مشکلی در اجرای برنامه پیش آمده</h1>
-            </CardHeader>
-            <CardContent>
-                <h2 className="text-base md:text-lg">{error.message}</h2>
-            </CardContent>
-            <CardFooter>
-                <Button variant={"default"} className="max-w-sm w-full mx-auto
-                " onClick={reset}>
-                    تلاش مجدد
-                </Button>
-            </CardFooter>
-        </Card>
+        <div className="flex justify-center items-center min-h-screen">
+            <Card className="text-center max-w-lg w-full">
+                <CardHeader>
+                    <h1 className="text-base sm:text-lg md:text-xl font-bold">
+                        متاسفانه مشکلی در اجرای برنامه پیش آمده
+                    </h1>
+                </CardHeader>
+                <CardContent>
+                    <h2 className="text-base md:text-lg">{error.message}</h2>
+                </CardContent>
+                <CardFooter>
+                    <Button
+                        variant={"default"}
+                        className="max-w-sm w-full mx-auto
+                "
+                        onClick={reset}>
+                        تلاش مجدد
+                    </Button>
+                </CardFooter>
+            </Card>
+        </div>
     );
 };
 
