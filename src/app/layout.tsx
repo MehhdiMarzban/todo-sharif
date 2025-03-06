@@ -20,7 +20,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fa" dir="rtl" suppressHydrationWarning>
+        <html lang="fa" className="scrollbar-thin scrollbar-thumb-primary scrollbar-track-primary-foreground" dir="rtl" suppressHydrationWarning>
             <body className={`${AppFont.variable} font-sans antialiased`}>
                 <AppProviders>{children}</AppProviders>
             </body>
