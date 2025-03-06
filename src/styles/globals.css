@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+    preferredstrategy: "pseudoelements";
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -100,9 +104,9 @@
     }
 }
 
-@utility container{
-    padding-inline : 1rem;
-    margin-inline : auto;
+@utility container {
+    padding-inline: 1rem;
+    margin-inline: auto;
 
     @variant 2xl {
         max-width: 1200px;
